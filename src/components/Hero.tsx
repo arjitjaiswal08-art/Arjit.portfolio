@@ -302,7 +302,7 @@ export const Hero: React.FC<HeroProps> = ({ theme, onOpenCommandMenu }) => {
                 <GraduationCap className="w-4 h-4 text-indigo-400 shrink-0" />
                 <div>
                   <div className="text-[11px] font-mono text-indigo-300 font-bold">IIT Madras</div>
-                  <div className="text-[10px] text-slate-400">BS Data Science & AI</div>
+                  <div className="text-[10px] text-slate-400">Data Science & AI</div>
                 </div>
               </div>
 
