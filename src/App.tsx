@@ -32,7 +32,7 @@ export function App() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#080c14] dark:bg-[#080c14] light:bg-[#f8fafc] text-slate-100 dark:text-slate-100 light:text-slate-900 selection:bg-brand-blue/30 selection:text-white transition-colors duration-300">
+    <div className="min-h-screen flex flex-col bg-[#050811] dark:bg-[#050811] text-slate-100 dark:text-slate-100 light:bg-[#f8fafc] light:text-slate-900 selection:bg-cyan-500/30 selection:text-white transition-colors duration-300">
       {/* Navigation Header */}
       <Navbar 
         theme={theme} 

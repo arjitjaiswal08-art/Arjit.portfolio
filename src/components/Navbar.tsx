@@ -6,7 +6,6 @@ import {
   Menu, 
   X, 
   FileText, 
-  Sparkles, 
   ArrowUpRight,
   Command
 } from 'lucide-react';
@@ -51,36 +50,38 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenComman
           {/* Brand Logo & Monogram */}
           <a
             href="#"
-            className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue rounded-lg p-1"
+            className="flex items-center gap-3.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue rounded-xl p-1"
             aria-label="Arjit Jaiswal - Home"
           >
-            <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-brand-blue/20 via-brand-violet/20 to-brand-cyan/20 border border-white/10 dark:border-white/10 light:border-slate-300 group-hover:border-brand-blue/50 transition-colors shadow-sm">
-              <span className="font-black text-sm tracking-tighter bg-gradient-to-r from-brand-blue via-brand-violet to-brand-cyan bg-clip-text text-transparent">
+            <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950 border border-white/15 group-hover:border-cyan-400/60 transition-all duration-300 shadow-[0_0_15px_rgba(56,189,248,0.15)] group-hover:shadow-[0_0_20px_rgba(56,189,248,0.35)]">
+              {/* Inner ambient glow */}
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-tr from-cyan-500/10 via-indigo-500/10 to-violet-500/10 opacity-80 group-hover:opacity-100 transition-opacity" />
+              <span className="font-extrabold text-sm tracking-tight text-white group-hover:text-cyan-300 transition-colors z-10 font-mono">
                 {PERSONAL_INFO.monogram}
               </span>
-              <span className="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+              <span className="absolute -top-1 -right-1 flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-cyan-500 border-2 border-slate-950"></span>
               </span>
             </div>
             <div className="flex flex-col">
-              <span className="font-semibold text-sm tracking-tight text-slate-900 dark:text-slate-100 group-hover:text-brand-blue transition-colors">
+              <span className="font-bold text-sm tracking-tight text-white group-hover:text-cyan-300 transition-colors flex items-center gap-1.5">
                 {PERSONAL_INFO.name}
               </span>
-              <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1">
-                <Sparkles className="w-2.5 h-2.5 text-brand-cyan" />
-                AI Engineer @ IITM
+              <span className="text-[11px] font-mono text-slate-400 flex items-center gap-1">
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                IIT Madras • AI & DS
               </span>
             </div>
           </a>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center gap-1 glass-panel px-4 py-1.5 rounded-full border border-white/10 dark:border-white/10 light:border-slate-200">
+          <nav className="hidden md:flex items-center gap-1 glass-panel px-4 py-1.5 rounded-full border border-white/10 shadow-lg shadow-black/20">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="px-3.5 py-1.5 text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-brand-blue dark:hover:text-white rounded-full hover:bg-slate-100 dark:hover:bg-white/5 transition-all duration-200"
+                className="px-3.5 py-1.5 text-xs font-semibold text-slate-300 hover:text-white rounded-full hover:bg-white/10 transition-all duration-200"
               >
                 {link.name}
               </a>
@@ -93,17 +94,17 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenComman
             {onOpenCommandMenu && (
               <button
                 onClick={onOpenCommandMenu}
-                className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-mono rounded-lg bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/10 transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-mono rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10 hover:border-white/20 transition-all cursor-pointer shadow-sm"
                 title="Quick Search & Actions (⌘K)"
               >
-                <Command className="w-3.5 h-3.5 text-brand-blue" />
-                <span>⌘K</span>
+                <Command className="w-3.5 h-3.5 text-cyan-400" />
+                <span className="text-slate-400">⌘K</span>
               </button>
             )}
 
             {/* Status Indicator */}
-            <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[11px] font-mono text-emerald-600 dark:text-emerald-400">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-[11px] font-mono text-emerald-400 shadow-[0_0_10px_rgba(16,185,129,0.15)]">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
               <span>Available for Roles</span>
             </div>
 
@@ -112,24 +113,24 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenComman
               href={PERSONAL_INFO.resumeDriveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-slate-900 dark:bg-white/10 hover:bg-brand-blue dark:hover:bg-brand-blue text-white transition-all duration-200 border border-white/10 shadow-sm"
+              className="btn-shimmer inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white transition-all duration-200 shadow-md shadow-blue-500/25 hover:shadow-cyan-500/35 hover:-translate-y-0.5"
               title="Download Arjit's Resume"
             >
               <FileText className="w-3.5 h-3.5" />
               <span>Resume</span>
-              <ArrowUpRight className="w-3 h-3 opacity-70" />
+              <ArrowUpRight className="w-3 h-3 opacity-80" />
             </a>
 
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
               aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-              className="p-2 rounded-lg bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-700 dark:text-slate-300 transition-colors border border-slate-200 dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-brand-blue cursor-pointer"
+              className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-colors border border-white/10 focus:outline-none focus:ring-2 focus:ring-cyan-400 cursor-pointer"
             >
               {theme === 'dark' ? (
                 <Sun className="w-4 h-4 text-amber-400" />
               ) : (
-                <Moon className="w-4 h-4 text-slate-700" />
+                <Moon className="w-4 h-4 text-slate-300" />
               )}
             </button>
           </div>

@@ -4,8 +4,8 @@
 
 @layer base {
   :root {
-    --bg-primary: #080c14;
-    --bg-secondary: #0f172a;
+    --bg-primary: #050811;
+    --bg-secondary: #0b1120;
     --text-primary: #f8fafc;
     --text-secondary: #94a3b8;
     --card-border: rgba(255, 255, 255, 0.08);
@@ -22,61 +22,138 @@
   body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
     overflow-x: hidden;
   }
 }
 
 /* Custom glowing effects and backgrounds */
 .cyber-grid {
-  background-size: 40px 40px;
+  background-size: 48px 48px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 30%, #000 60%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 30%, #000 60%, transparent 100%);
 }
 
 .light .cyber-grid {
   background-image: 
-    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+    linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+}
+
+/* Ambient Aurora Glow Blooms */
+.aurora-bg {
+  position: absolute;
+  filter: blur(120px);
+  opacity: 0.55;
+  pointer-events: none;
+  border-radius: 9999px;
+  mix-blend-mode: screen;
 }
 
 .radial-glow {
-  background: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.15), transparent 70%);
+  background: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.22), transparent 70%);
 }
 
 .radial-glow-violet {
-  background: radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.12), transparent 60%);
+  background: radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.18), transparent 60%);
 }
 
 .radial-glow-cyan {
-  background: radial-gradient(circle at 20% 40%, rgba(6, 182, 212, 0.12), transparent 60%);
+  background: radial-gradient(circle at 20% 40%, rgba(6, 182, 212, 0.18), transparent 60%);
 }
 
-/* Glassmorphism utility */
+/* Glassmorphism 2.0 with Specular Highlights */
 .glass-panel {
-  background: rgba(15, 23, 42, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(11, 17, 32, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 20px 40px -15px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.12);
 }
 
 .light .glass-panel {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.88);
   border: 1px solid rgba(15, 23, 42, 0.08);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.06);
 }
 
 .glass-nav {
-  background: rgba(8, 12, 20, 0.8);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(5, 8, 17, 0.82);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.4);
 }
 
 .light .glass-nav {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.9);
   border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+/* Premium Button Shimmer */
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    115deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.22) 50%,
+    transparent 80%
+  );
+  animation: shimmer-swipe 4s infinite ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes shimmer-swipe {
+  0% { transform: translateX(-100%); }
+  35% { transform: translateX(100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Neon Text Gradients */
+.text-gradient-hero {
+  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-ai {
+  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 40%, #c084fc 80%, #34d399 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, #fde047 0%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Card hover glow */
+.card-glow-hover {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-glow-hover:hover {
+  transform: translateY(-5px);
+  border-color: rgba(56, 189, 248, 0.45);
+  box-shadow: 
+    0 20px 40px -15px rgba(56, 189, 248, 0.2),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 /* Custom scrollbar */
@@ -85,7 +162,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #080c14;
+  background: #050811;
 }
 
 .light ::-webkit-scrollbar-track {
@@ -102,35 +179,5 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
-}
-
-/* Text Gradients */
-.text-gradient-primary {
-  background: linear-gradient(135deg, #ffffff 20%, #94a3b8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.light .text-gradient-primary {
-  background: linear-gradient(135deg, #0f172a 20%, #475569 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.text-gradient-ai {
-  background: linear-gradient(135deg, #60a5fa 0%, #c084fc 50%, #22d3ee 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Card hover glow */
-.card-glow-hover {
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.card-glow-hover:hover {
-  transform: translateY(-4px);
-  border-color: rgba(96, 165, 250, 0.4);
-  box-shadow: 0 12px 30px -10px rgba(59, 130, 246, 0.15);
+  background: #38bdf8;
 }
