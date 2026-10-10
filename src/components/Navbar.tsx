@@ -1,0 +1,186 @@
+import React, { useState, useEffect } from 'react';
+import { PERSONAL_INFO } from '../data/portfolioData';
+import { 
+  Sun, 
+  Moon, 
+  Menu, 
+  X, 
+  FileText, 
+  Sparkles,
+  ArrowUpRight
+} from 'lucide-react';
+
+interface NavbarProps {
+  theme: 'dark' | 'light';
+  toggleTheme: () => void;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navLinks = [
+    { name: 'About', href: '#about' },
+    { name: 'Projects', href: '#projects' },
+    { name: 'Skills', href: '#skills' },
+    { name: 'Experience', href: '#experience' },
+    { name: 'Philosophy', href: '#philosophy' },
+    { name: 'Contact', href: '#contact' },
+  ];
+
+  return (
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? 'glass-nav py-3 shadow-lg shadow-black/5 dark:shadow-black/20'
+          : 'bg-transparent py-5'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between">
+          {/* Brand Logo & Monogram */}
+          <a
+            href="#"
+            className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue rounded-lg p-1"
+            aria-label="Arjit Jaiswal - Home"
+          >
+            <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-brand-blue/20 via-brand-violet/20 to-brand-cyan/20 border border-white/10 dark:border-white/10 light:border-slate-300 group-hover:border-brand-blue/50 transition-colors">
+              <span className="font-black text-sm tracking-tighter bg-gradient-to-r from-brand-blue via-brand-violet to-brand-cyan bg-clip-text text-transparent">
+                {PERSONAL_INFO.monogram}
+              </span>
+              <span className="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+              </span>
+            </div>
+            <div className="flex flex-col">
+              <span className="font-semibold text-sm tracking-tight text-slate-900 dark:text-slate-100 group-hover:text-brand-blue transition-colors">
+                {PERSONAL_INFO.name}
+              </span>
+              <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                <Sparkles className="w-2.5 h-2.5 text-brand-cyan" />
+                AI Engineer @ IITM
+              </span>
+            </div>
+          </a>
+
+          {/* Desktop Nav Links */}
+          <nav className="hidden md:flex items-center gap-1 glass-panel px-4 py-1.5 rounded-full border border-white/10 dark:border-white/10 light:border-slate-200">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="px-3.5 py-1.5 text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-brand-blue dark:hover:text-white rounded-full hover:bg-slate-100 dark:hover:bg-white/5 transition-all duration-200"
+              >
+                {link.name}
+              </a>
+            ))}
+          </nav>
+
+          {/* Right Action Buttons */}
+          <div className="hidden sm:flex items-center gap-3">
+            {/* Status Indicator */}
+            <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[11px] font-mono text-emerald-600 dark:text-emerald-400">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>Available for Roles</span>
+            </div>
+
+            {/* Resume Button */}
+            <a
+              href={PERSONAL_INFO.resumeDriveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-slate-900 dark:bg-white/10 hover:bg-brand-blue dark:hover:bg-brand-blue text-white transition-all duration-200 border border-white/10 shadow-sm"
+              title="Download Arjit's Resume"
+            >
+              <FileText className="w-3.5 h-3.5" />
+              <span>Resume</span>
+              <ArrowUpRight className="w-3 h-3 opacity-70" />
+            </a>
+
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+              className="p-2 rounded-lg bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-700 dark:text-slate-300 transition-colors border border-slate-200 dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-brand-blue"
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-4 h-4 text-amber-400" />
+              ) : (
+                <Moon className="w-4 h-4 text-slate-700" />
+              )}
+            </button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="flex sm:hidden items-center gap-2">
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              className="p-2 rounded-lg bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-white/10"
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-4 h-4 text-amber-400" />
+              ) : (
+                <Moon className="w-4 h-4 text-slate-700" />
+              )}
+            </button>
+
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 rounded-lg bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-white/10 focus:outline-none"
+              aria-label="Toggle navigation menu"
+              aria-expanded={mobileMenuOpen}
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Drawer */}
+      {mobileMenuOpen && (
+        <div className="sm:hidden glass-panel mt-3 mx-4 p-5 rounded-2xl border border-white/10 shadow-2xl animate-in fade-in slide-in-from-top-4 duration-200">
+          <div className="flex flex-col gap-3">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-white/10">
+              <span className="text-xs font-mono text-emerald-500 flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                Open for Collaborations
+              </span>
+              <a
+                href={PERSONAL_INFO.resumeDriveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1 rounded bg-brand-blue text-white"
+              >
+                <FileText className="w-3 h-3" />
+                Resume
+              </a>
+            </div>
+
+            <nav className="flex flex-col gap-1 py-2">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="px-3 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-brand-blue hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg transition-colors"
+                >
+                  {link.name}
+                </a>
+              ))}
+            </nav>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+};

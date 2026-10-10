@@ -1,0 +1,622 @@
+export interface Project {
+  id: string;
+  title: string;
+  category: 'all' | 'ai-ml' | 'fullstack' | 'product';
+  badge: string;
+  tagline: string;
+  description: string;
+  stack: string[];
+  metrics?: { label: string; value: string }[];
+  liveUrl?: string;
+  githubUrl?: string;
+  huggingfaceUrl?: string;
+  featured: boolean;
+  type: 'Featured Project' | 'Production Application' | 'Prototype' | 'Concept' | 'Research';
+  caseStudy: {
+    problem: string;
+    approach: string;
+    technicalDetails: string[];
+    results: string;
+    realWorldImpact: string;
+  };
+}
+
+export interface SkillCategory {
+  title: string;
+  description: string;
+  skills: { name: string; highlight?: boolean; level?: string }[];
+}
+
+export interface ExperienceItem {
+  period: string;
+  role: string;
+  domain: string;
+  summary: string;
+  deliverables: string[];
+  technologies: string[];
+}
+
+export interface Certification {
+  name: string;
+  issuer: string;
+  level: string;
+  verified: boolean;
+  skills: string[];
+  link?: string;
+}
+
+export const PERSONAL_INFO = {
+  name: "Arjit Jaiswal",
+  monogram: "AJ",
+  institution: "IIT Madras",
+  program: "Data Science and Artificial Intelligence",
+  roles: [
+    "AI Engineer",
+    "Machine Learning Developer",
+    "Full-Stack Developer",
+    "AI Product Builder"
+  ],
+  headline: "I build intelligent systems that solve real-world problems.",
+  heroLabel: "DATA SCIENCE & AI @ IIT MADRAS",
+  subheadline:
+    "I’m Arjit Jaiswal — an AI-focused developer working across machine learning, generative AI, and full-stack engineering. I turn ideas into practical products, train models on real-world data, and build applications that connect intelligence with usability.",
+  status: "Open to AI/ML internships, research & product collaborations",
+  email: "arjitjaiswal.ai@gmail.com", // easily configurable
+  github: "https://github.com/Arjit077",
+  linkedin: "https://www.linkedin.com/in/j-arjit/",
+  huggingface: "https://huggingface.co/spaces/arjitja/AST_Audio_Classification",
+  resumeDriveUrl: "https://drive.google.com/file/d/1e9QKKRh2lA8vrb1XHChOBR_2B2wXKTLR/view?usp=drive_link",
+  resumeLocalPath: "/resume.pdf",
+  location: "Chennai / India",
+  primaryLanguages: "Python & JavaScript",
+  focus: "AI Engineering & Applied Machine Learning",
+};
+
+export const FEATURED_PROJECTS: Project[] = [
+  {
+    id: "ast-audio",
+    title: "AST Audio Classification",
+    category: "ai-ml",
+    badge: "Audio Transformer Deep Dive",
+    tagline: "Transformer-based audio event recognition leveraging Audio Spectrogram Transformer (AST)",
+    description:
+      "An advanced audio classification system built using the Audio Spectrogram Transformer (AST) architecture to recognize complex acoustic events from raw sound recordings, significantly outperforming classical CNN and BiLSTM baselines.",
+    stack: ["Python", "PyTorch", "Hugging Face Transformers", "Torchaudio", "Librosa", "Audio Spectrograms"],
+    metrics: [
+      { label: "Macro F1 Score", value: "0.84172" },
+      { label: "Sampling Rate", value: "16 kHz" },
+      { label: "Architecture", value: "AST ViT Patch" },
+      { label: "Pretrained Base", value: "AudioSet 10-10" },
+    ],
+    huggingfaceUrl: "https://huggingface.co/spaces/arjitja/AST_Audio_Classification",
+    githubUrl: "https://github.com/Arjit077",
+    liveUrl: "https://huggingface.co/spaces/arjitja/AST_Audio_Classification",
+    featured: true,
+    type: "Featured Project",
+    caseStudy: {
+      problem:
+        "Environmental audio event classification requires capturing both short-duration transient acoustic bursts and long-range harmonic dependencies across frequencies. Traditional 2D CNNs suffer from restricted receptive fields, while recurrent models (BiLSTM) struggle with long spectrogram sequences.",
+      approach:
+        "Employed the Audio Spectrogram Transformer (MIT/ast-finetuned-audioset-10-10-0.4593). Audio was standardized and resampled to 16 kHz, converted into log-mel filterbank spectrograms (128 mel bins), and split into 16x16 time-frequency patches projected via 2D convolution embeddings before self-attention processing.",
+      technicalDetails: [
+        "Audio preprocessing: 16 kHz uniform resampling, silent interval trimming, log-mel spectrogram computation.",
+        "Model Backbone: Vision Transformer (ViT) adapted for audio spectrogram patches with positional embeddings.",
+        "Ablation comparison: Built and benchmarked 2D CNN (F1 ~0.76) and BiLSTM (F1 ~0.71) against the AST pipeline.",
+        "Evaluation Metric: Macro F1 optimization to handle class imbalance across heterogeneous acoustic events.",
+        "Deployment: Interactive Hugging Face Space application for real-time sound file inference.",
+      ],
+      results:
+        "Achieved a verified Macro F1 score of 0.84172, delivering superior generalization across noisy acoustic recordings compared to convolution-only baselines.",
+      realWorldImpact:
+        "Applicable to smart acoustic monitoring, industrial machinery fault diagnosis via vibration/audio, bioacoustic biodiversity tracking, and intelligent security surveillance.",
+    },
+  },
+  {
+    id: "kaggle-ml",
+    title: "Machine Learning Competition Pipelines",
+    category: "ai-ml",
+    badge: "Kaggle Competitive ML",
+    tagline: "End-to-end competitive predictive modeling, advanced feature engineering, and ensemble systems",
+    description:
+      "A suite of structured machine learning competition workflows focusing on rigorous exploratory data analysis, leak-free feature engineering, cross-validation architectures, and gradient boosted tree ensembles.",
+    stack: ["Python", "Scikit-Learn", "LightGBM", "XGBoost", "CatBoost", "Pandas", "NumPy", "TF-IDF"],
+    metrics: [
+      { label: "Validation Strategy", value: "Stratified K-Fold" },
+      { label: "Optimization Metric", value: "Macro F1 / RMSE" },
+      { label: "Feature Pipeline", value: "Automated & TF-IDF" },
+      { label: "Model Type", value: "GBDT Ensembles" },
+    ],
+    githubUrl: "https://github.com/Arjit077",
+    featured: true,
+    type: "Featured Project",
+    caseStudy: {
+      problem:
+        "Real-world structured datasets present high-cardinality categorical features, severe class imbalances, skewed distributions, missing data, and unstructured text columns requiring cohesive feature pipelines without data leakage.",
+      approach:
+        "Constructed end-to-end pipelines combining domain-specific feature engineering, frequency/target encodings, TF-IDF text representations, and iterative validation using Stratified 5-Fold schemes.",
+      technicalDetails: [
+        "Missing-value imputation strategies tailored to feature semantics (median/mode and KNN).",
+        "Feature interactions: Polynomial combinations, group aggregations (mean, std, min, max across categorical pivots).",
+        "NLP Feature Extraction: TF-IDF vectorization with n-gram extraction and truncated SVD dimensionality reduction.",
+        "Model Diversity: LightGBM, XGBoost, CatBoost, and regularized Logistic Regression.",
+        "Ensembling: Out-of-fold probability blending with Nelder-Mead metric weight optimization.",
+      ],
+      results:
+        "Consistent validation performance gains over baseline models through rigorous out-of-fold calibration and leak-free transformations.",
+      realWorldImpact:
+        "Directly translates to real-world business tabular data: customer churn prediction, credit risk scoring, fraud detection, and demand forecasting.",
+    },
+  },
+  {
+    id: "placement-portal",
+    title: "Campus Placement Portal",
+    category: "fullstack",
+    badge: "Production Full-Stack Platform",
+    tagline: "Multi-role recruitment platform streamlining campus hiring between Admins, Companies, and Students",
+    description:
+      "A complete enterprise web application designed to eliminate recruitment bottlenecks by managing job drives, student candidacies, approval lifecycles, and resume applications with strict role-based access control.",
+    stack: ["Flask", "Python", "Vue.js", "JavaScript", "SQLAlchemy", "SQLite", "JWT Auth", "Bootstrap 5", "HTML5"],
+    metrics: [
+      { label: "Architecture", value: "REST API + SPA" },
+      { label: "Access Roles", value: "Admin, Co., Student" },
+      { label: "Security", value: "JWT Tokens & Bcrypt" },
+      { label: "Database", value: "Relational ORM" },
+    ],
+    githubUrl: "https://github.com/Arjit077",
+    featured: true,
+    type: "Production Application",
+    caseStudy: {
+      problem:
+        "University placement drives involve disjointed manual coordination between administrators verifying company credentials, companies posting job drives with eligibility criteria, and hundreds of students tracking application stages.",
+      approach:
+        "Engineered a full-stack platform featuring granular Role-Based Access Control (RBAC), declarative ORM relationships, automated validation rules, and intuitive reactive dashboards for each user archetype.",
+      technicalDetails: [
+        "Role-Based Authentication: Secure JWT-backed authentication with refresh flows and role permission middleware.",
+        "Company Approval Lifecycle: Admin dashboard for reviewing company registrations, approving/rejecting drive postings.",
+        "Drive Eligibility Engine: Dynamic filtering matching student GPA/branch criteria against job prerequisites.",
+        "Application State Machine: Transparent progression (Applied -> Shortlisted -> Interviewed -> Selected).",
+        "Resume Management: Secure resume PDF uploads, server validation, and candidate profile view.",
+      ],
+      results:
+        "Delivered an intuitive, responsive end-to-end recruitment management portal handling the complete placement cycle.",
+      realWorldImpact:
+        "Eliminates administrative overhead, prevents duplicate filings, and provides students and recruiters with live status transparency.",
+    },
+  },
+  {
+    id: "klyro-ai",
+    title: "Klyro AI — Personal AI Assistant",
+    category: "product",
+    badge: "AI Product Architecture",
+    tagline: "Intelligent personal assistant engineered for natural conversational task execution and daily productivity",
+    description:
+      "An AI assistant project focused on natural human-computer interaction, context-aware memory retention, and tool orchestration to assist users with daily research and task automation.",
+    stack: ["Python", "FastAPI", "LLM APIs", "Prompt Engineering", "Vector Storage", "React UI"],
+    metrics: [
+      { label: "Interaction", value: "Conversational NLP" },
+      { label: "Context Window", value: "Buffer + Semantic" },
+      { label: "Integration", value: "Tool Calling" },
+      { label: "Stage", value: "Active Prototype" },
+    ],
+    githubUrl: "https://github.com/Arjit077",
+    featured: true,
+    type: "Prototype",
+    caseStudy: {
+      problem:
+        "Standard conversational AI interfaces lack contextual continuity across tasks and fail to provide transparent reasoning steps when aiding users in multi-step workflows.",
+      approach:
+        "Designing an assistant architecture with structured prompt pipelines, conversational memory management, and modular tool integrations for specific utilities.",
+      technicalDetails: [
+        "Context Management: Sliding window memory combined with semantic vector retrieval for historical context.",
+        "Prompt Design: Few-shot structured system prompts with strict output formatting (JSON/Markdown).",
+        "Function Calling Pipeline: Dispatcher routing user queries to local utility tools.",
+        "Interface: Clean, distraction-free conversational UI with markdown rendering and code highlighting.",
+      ],
+      results:
+        "Working prototype demonstrating natural conversation, task context retention, and multi-turn problem solving.",
+      realWorldImpact:
+        "Accelerates knowledge lookup, synthesizes complex notes, and provides personal workflow acceleration.",
+    },
+  },
+  {
+    id: "unica-ai",
+    title: "Unica AI — Product Initiative",
+    category: "product",
+    badge: "AI Product R&D",
+    tagline: "Applied AI research and product development initiative for domain-specific automation",
+    description:
+      "An independent AI product-building initiative dedicated to exploring practical, user-centric AI solutions that bridge academic machine learning research with scalable software products.",
+    stack: ["Python", "LLMs", "RAG Pipelines", "FastAPI", "Full-Stack Web", "Product Strategy"],
+    metrics: [
+      { label: "Focus", value: "Applied AI Products" },
+      { label: "R&D Domains", value: "RAG & Workflows" },
+      { label: "Status", value: "Active Exploration" },
+      { label: "Philosophy", value: "Product First" },
+    ],
+    githubUrl: "https://github.com/Arjit077",
+    featured: true,
+    type: "Prototype",
+    caseStudy: {
+      problem:
+        "Many emerging AI breakthroughs remain trapped in research papers or complex command-line scripts without intuitive user experiences that solve real-world problems.",
+      approach:
+        "Unica AI serves as my structured innovation sandbox for formulating problem statements, prototyping domain-specific AI workflows, and evaluating technical feasibility.",
+      technicalDetails: [
+        "Product Exploration: Evaluating RAG workflows for specific technical documentation and legal/regulatory texts.",
+        "Agentic Architectures: Prototyping autonomous chains for multi-step data verification.",
+        "UX Design: Translating non-deterministic AI outputs into reliable, structured interface feedback.",
+      ],
+      results:
+        "Continuous prototyping and architectural evaluation of practical AI tools.",
+      realWorldImpact:
+        "Developing intuitive, production-grade intelligence tools that empower non-technical users to leverage AI capabilities.",
+    },
+  },
+  {
+    id: "financial-budgeting",
+    title: "Personal Financial Planning & Budgeting System",
+    category: "fullstack",
+    badge: "Full-Stack Prototype",
+    tagline: "Smart expense tracking, categorical budgeting, and financial trajectory projection",
+    description:
+      "A personal finance management web application featuring interactive cash-flow visualization, expense categorization, budget thresholds, and historical spending analytics.",
+    stack: ["Python", "Flask", "JavaScript", "SQLite", "Chart.js", "Bootstrap"],
+    featured: false,
+    type: "Prototype",
+    caseStudy: {
+      problem: "Users struggle to track scattered expenses and project long-term savings goals effectively.",
+      approach: "Built clean ledger architecture with automatic category aggregation and visual budget meters.",
+      technicalDetails: ["RESTful transaction APIs", "Dynamic charting with Chart.js", "Monthly budget variance computation"],
+      results: "Functional dashboard providing instant insights into recurring spending leaks.",
+      realWorldImpact: "Fosters financial literacy and disciplined personal savings habits."
+    }
+  },
+  {
+    id: "agri-ai",
+    title: "AI Agricultural Intelligence & Crop Health",
+    category: "ai-ml",
+    badge: "AI Concept & Research",
+    tagline: "Exploring computer vision and sensor telemetry for precision agriculture and early disease detection",
+    description:
+      "A research concept investigating convolutional neural networks for leaf disease classification combined with weather telemetry to advise smallholder farmers.",
+    stack: ["Python", "PyTorch", "Computer Vision Concepts", "Data Analysis", "Sensor Telemetry"],
+    featured: false,
+    type: "Concept",
+    caseStudy: {
+      problem: "Crop diseases cause massive yield losses when detected too late in the cultivation cycle.",
+      approach: "Conceptualized a mobile-accessible CNN model trained on plant pathology datasets.",
+      technicalDetails: ["Transfer learning on MobileNet/ResNet architectures", "Offline inference considerations for low-bandwidth rural areas"],
+      results: "Architectural blueprint and data exploration for low-latency crop health diagnostics.",
+      realWorldImpact: "Empowers rural farmers with immediate agronomic guidance to protect crops."
+    }
+  },
+  {
+    id: "cyber-scam-detection",
+    title: "Cybersecurity & Scam Detection Engine",
+    category: "ai-ml",
+    badge: "NLP & Security Concept",
+    tagline: "Heuristic and NLP-based detection of phishing messages, social engineering, and fraudulent URLs",
+    description:
+      "An intelligent scam detection prototype that analyzes message semantics, suspicious lexical patterns, and domain reputations to flag fraudulent communications.",
+    stack: ["Python", "NLP", "Scikit-Learn", "Feature Engineering", "Regular Expressions"],
+    featured: false,
+    type: "Concept",
+    caseStudy: {
+      problem: "Social engineering and financial phishing attacks increasingly deceive conventional keyword filters.",
+      approach: "Combined lexical URL features with TF-IDF semantic embeddings to classify high-risk messages.",
+      technicalDetails: ["Entropy analysis of URL domains", "Sentiment and urgency polarity extraction", "Lightweight classifier for edge deployment"],
+      results: "High-precision prototype capable of identifying urgency-driven phishing hooks.",
+      realWorldImpact: "Protects digital banking users from financial fraud and identity theft."
+    }
+  },
+  {
+    id: "legal-ai-prototype",
+    title: "AI Legal Assistance & Document RAG Prototype",
+    category: "ai-ml",
+    badge: "NLP & RAG Prototype",
+    tagline: "Retrieval-Augmented Generation prototype for statutory lookup and contract analysis",
+    description:
+      "An experimental legal tech application exploring semantic search, chunking strategies, and LLM-assisted summaries for dense legal documentation.",
+    stack: ["Python", "LangChain Concepts", "Vector Embeddings", "FastAPI", "Prompt Engineering"],
+    featured: false,
+    type: "Prototype",
+    caseStudy: {
+      problem: "Navigating hundreds of pages of legal statutes and contracts is time-prohibitive for non-lawyers.",
+      approach: "Implemented a RAG pipeline chunking documents and retrieving relevant statutory clauses via cosine similarity.",
+      technicalDetails: ["Hierarchical document chunking", "Embedding generation", "Grounded generation to prevent hallucinations"],
+      results: "Accurate citation-backed summaries of contractual clauses and statutory provisions.",
+      realWorldImpact: "Democratizes access to legal understanding for startups and individuals."
+    }
+  },
+  {
+    id: "vedic-astrology",
+    title: "Vedic Astrology Calculation Engine",
+    category: "fullstack",
+    badge: "Algorithmic Prototype",
+    tagline: "Precise astronomical calculations, planetary ephemeris mapping, and Vedic chart generation",
+    description:
+      "A computational engine implementing traditional Vedic astrological algorithms (Kundali, planetary positions, Dasha timelines) using astronomical coordinates.",
+    stack: ["Python", "JavaScript", "Mathematical Modeling", "SVG Chart Rendering", "Algorithms"],
+    featured: false,
+    type: "Prototype",
+    caseStudy: {
+      problem: "Traditional astrological systems require complex mathematical projections of planetary ephemeris coordinates onto zodiacal houses.",
+      approach: "Engineered mathematical algorithms calculating ascendants and planetary longitudes based on timestamp and geographic coordinates.",
+      technicalDetails: ["Ephemeris coordinate translation", "Dynamic SVG natal chart rendering", "Dasha timeline calculations"],
+      results: "High-precision algorithmic generation of North & South Indian astrological charts.",
+      realWorldImpact: "Merges cultural computational heritage with modern mathematical software design."
+    }
+  },
+  {
+    id: "rural-shop-pos",
+    title: "Rural Shop Management & Digital Bookkeeping",
+    category: "fullstack",
+    badge: "Full-Stack Prototype",
+    tagline: "Lightweight, offline-friendly inventory tracking and ledger management for micro-retailers",
+    description:
+      "A pragmatic digital bookkeeping solution tailored for small rural shopkeepers, providing credit ledger (Khata) tracking, inventory alerts, and simple sales logging.",
+    stack: ["Python", "Flask", "SQLite", "JavaScript", "HTML5", "Responsive CSS"],
+    featured: false,
+    type: "Prototype",
+    caseStudy: {
+      problem: "Small neighborhood retailers often rely on manual paper notebooks, leading to uncollected credits and untracked inventory spoilage.",
+      approach: "Built an ultra-fast, minimal digital ledger with high-contrast UI and WhatsApp receipt generation.",
+      technicalDetails: ["Optimized relational schemas", "Credit balance tracking with automatic reminders", "Low-bandwidth responsive design"],
+      results: "Reliable, intuitive bookkeeping interface tested for rapid checkout flows.",
+      realWorldImpact: "Brings modern digital accounting to grassroots micro-enterprises."
+    }
+  },
+  {
+    id: "parking-trekking-suite",
+    title: "Vehicle Parking & Trekking Management Applications",
+    category: "fullstack",
+    badge: "Full-Stack Suite",
+    tagline: "Real-time parking slot allocation systems and outdoor trekking expedition coordination",
+    description:
+      "Two practical operational management systems: an automated smart parking slot allocation platform and a comprehensive trekking management portal for managing expeditions, participants, and gear logs.",
+    stack: ["Python", "Flask", "Vue.js / JavaScript", "SQLAlchemy", "REST APIs"],
+    featured: false,
+    type: "Prototype",
+    caseStudy: {
+      problem: "Real-time logistics management for vehicle parking and outdoor adventure expeditions require distinct state management and reservation tracking.",
+      approach: "Engineered scalable state machines for slot reservations, live occupancy telemetry, trail risk ratings, and participant roster tracking.",
+      technicalDetails: ["Concurrent slot reservation handling", "Trail status and weather advisory feeds", "Equipment checkout tracking"],
+      results: "Robust prototypes delivering seamless operational workflows for both use cases.",
+      realWorldImpact: "Streamlines municipal parking efficiency and outdoor adventure safety."
+    }
+  }
+];
+
+export const SKILL_CATEGORIES: SkillCategory[] = [
+  {
+    title: "Programming Languages",
+    description: "Core languages used across machine learning models and web backends",
+    skills: [
+      { name: "Python", highlight: true },
+      { name: "JavaScript", highlight: true },
+      { name: "TypeScript", highlight: true },
+      { name: "SQL", highlight: true },
+      { name: "Java (Basics)", highlight: false },
+      { name: "C# (Basics)", highlight: false },
+    ],
+  },
+  {
+    title: "AI & Machine Learning",
+    description: "Model architectures, training pipelines, and evaluation methodologies",
+    skills: [
+      { name: "Machine Learning", highlight: true },
+      { name: "Deep Learning", highlight: true },
+      { name: "Audio Classification (AST)", highlight: true },
+      { name: "Natural Language Processing (NLP)", highlight: true },
+      { name: "Large Language Models (LLMs)", highlight: true },
+      { name: "Generative AI & Prompt Engineering", highlight: true },
+      { name: "RAG Concepts", highlight: true },
+      { name: "Feature Engineering & Imputation", highlight: true },
+      { name: "Model Evaluation (F1/AUC/RMSE)", highlight: true },
+      { name: "Ensemble Learning (Blending/Voting)", highlight: true },
+    ],
+  },
+  {
+    title: "ML Libraries & Tools",
+    description: "Frameworks for scientific computing, neural networks, and tabular modeling",
+    skills: [
+      { name: "PyTorch", highlight: true },
+      { name: "Hugging Face Transformers", highlight: true },
+      { name: "Scikit-Learn", highlight: true },
+      { name: "LightGBM", highlight: true },
+      { name: "XGBoost", highlight: true },
+      { name: "Pandas", highlight: true },
+      { name: "NumPy", highlight: true },
+      { name: "Torchaudio & Librosa", highlight: true },
+    ],
+  },
+  {
+    title: "Backend & APIs",
+    description: "Robust server-side architectures, REST design, and database interaction",
+    skills: [
+      { name: "Flask", highlight: true },
+      { name: "REST APIs", highlight: true },
+      { name: "SQLAlchemy ORM", highlight: true },
+      { name: "JWT Authentication", highlight: true },
+      { name: "Jinja2", highlight: false },
+      { name: "FastAPI Basics", highlight: false },
+    ],
+  },
+  {
+    title: "Frontend & UI",
+    description: "Modern component-driven web interfaces with rich responsiveness",
+    skills: [
+      { name: "React", highlight: true },
+      { name: "Vue.js", highlight: true },
+      { name: "HTML5 & Semantic Web", highlight: true },
+      { name: "CSS3 & Modern Layouts", highlight: true },
+      { name: "Tailwind CSS", highlight: true },
+      { name: "Bootstrap 5", highlight: false },
+    ],
+  },
+  {
+    title: "Databases & Infrastructure",
+    description: "Data persistence, asynchronous task workers, and version control",
+    skills: [
+      { name: "SQLite", highlight: true },
+      { name: "Redis Caching Basics", highlight: false },
+      { name: "Celery Workers Basics", highlight: false },
+      { name: "Git & Version Control", highlight: true },
+      { name: "GitHub Collaboration", highlight: true },
+    ],
+  },
+  {
+    title: "Deployment & Platforms",
+    description: "Cloud hosting environments and interactive model spaces",
+    skills: [
+      { name: "Hugging Face Spaces", highlight: true },
+      { name: "Vercel", highlight: true },
+      { name: "Render", highlight: true },
+      { name: "Kaggle Notebooks", highlight: true },
+    ],
+  },
+];
+
+export const EXPERIENCE_MILESTONES: ExperienceItem[] = [
+  {
+    period: "Ongoing",
+    role: "Audio AI & Transformer Research",
+    domain: "Deep Learning & Transformer Fine-Tuning",
+    summary:
+      "Engineered an Audio Spectrogram Transformer (AST) pipeline for environmental audio recognition, establishing empirical benchmarks against CNN and BiLSTM baselines.",
+    deliverables: [
+      "Standardized 16 kHz audio processing and log-mel spectrogram extraction.",
+      "Fine-tuned MIT/ast-finetuned-audioset-10-10-0.4593 on specialized audio events.",
+      "Achieved a verified Macro F1 score of 0.84172.",
+      "Deployed an interactive model demonstration on Hugging Face Spaces.",
+    ],
+    technologies: ["PyTorch", "Hugging Face", "Librosa", "Torchaudio", "Python"],
+  },
+  {
+    period: "2024 - Present",
+    role: "Competitive ML & Tabular Predictive Modeling",
+    domain: "Machine Learning & Kaggle Competitions",
+    summary:
+      "Developed robust predictive pipelines across complex structured datasets, prioritizing leak-free feature engineering and out-of-fold cross-validation.",
+    deliverables: [
+      "Designed domain feature interactions, frequency encodings, and missing value imputation.",
+      "Extracted text features with TF-IDF vectorization and truncated SVD.",
+      "Trained and tuned LightGBM, XGBoost, and CatBoost gradient boosted trees.",
+      "Implemented weighted soft-voting and out-of-fold metric ensembling.",
+    ],
+    technologies: ["LightGBM", "XGBoost", "Scikit-Learn", "Pandas", "NumPy"],
+  },
+  {
+    period: "2024",
+    role: "Campus Placement Platform Engineering",
+    domain: "Full-Stack Web Development & Role-Based Workflows",
+    summary:
+      "Architected a multi-role campus recruitment platform serving Administrators, Companies, and Students with role-based access control and full drive management.",
+    deliverables: [
+      "Designed normalized relational database schema with SQLAlchemy and SQLite.",
+      "Built RESTful Flask API endpoints secured with JWT tokens.",
+      "Constructed reactive Vue.js frontends for company job postings and student applications.",
+      "Implemented resume upload handling, validation, and candidate status tracking.",
+    ],
+    technologies: ["Flask", "Vue.js", "Python", "SQLAlchemy", "JWT", "Bootstrap 5"],
+  },
+  {
+    period: "2024 - Present",
+    role: "AI Product Architecture & Explorations",
+    domain: "Generative AI, LLMs & Unica AI Initiative",
+    summary:
+      "Initiated Klyro AI and Unica AI to explore practical applied AI products, focusing on personal assistant architectures, RAG pipelines, and conversational interfaces.",
+    deliverables: [
+      "Prototyped prompt chains and semantic memory buffers for AI assistants.",
+      "Investigated RAG knowledge retrieval architectures for specialized documentation.",
+      "Built interactive proof-of-concept interfaces connecting LLM APIs with real tools.",
+    ],
+    technologies: ["LLM APIs", "FastAPI", "Prompt Engineering", "React", "Python"],
+  },
+];
+
+export const CERTIFICATIONS: Certification[] = [
+  {
+    name: "Python (Basic)",
+    issuer: "HackerRank",
+    level: "Basic",
+    verified: true,
+    skills: ["Data Structures", "OOP", "Functional Helpers"],
+  },
+  {
+    name: "SQL (Advanced)",
+    issuer: "HackerRank",
+    level: "Advanced",
+    verified: true,
+    skills: ["Complex Joins", "Subqueries", "Aggregations", "Window Functions"],
+  },
+  {
+    name: "SQL (Basic)",
+    issuer: "HackerRank",
+    level: "Basic",
+    verified: true,
+    skills: ["Queries", "Filtering", "Sorting", "Basic Joins"],
+  },
+  {
+    name: "React (Basic)",
+    issuer: "HackerRank",
+    level: "Basic",
+    verified: true,
+    skills: ["Components", "Props & State", "Hooks", "Rendering"],
+  },
+  {
+    name: "REST API (Intermediate)",
+    issuer: "HackerRank",
+    level: "Intermediate",
+    verified: true,
+    skills: ["HTTP Methods", "Payload Parsing", "Pagination", "Status Codes"],
+  },
+  {
+    name: "JavaScript (Basic)",
+    issuer: "HackerRank",
+    level: "Basic",
+    verified: true,
+    skills: ["ES6+", "Async/Await", "Array Methods", "DOM"],
+  },
+  {
+    name: "Java (Basic)",
+    issuer: "HackerRank",
+    level: "Basic",
+    verified: true,
+    skills: ["OOP Principles", "Collections", "Syntax Basics"],
+  },
+  {
+    name: "C# (Basic)",
+    issuer: "HackerRank",
+    level: "Basic",
+    verified: true,
+    skills: ["C# Fundamentals", "Control Flow", "Object-Oriented Design"],
+  },
+];
+
+export const PHILOSOPHY_PRINCIPLES = [
+  {
+    number: "01",
+    title: "Build to Learn",
+    subtitle: "Understanding through implementation",
+    description:
+      "Theory solidifies when you build from first principles. I deepen my understanding by training models, experimenting with architectures, and solving practical engineering hurdles in real code.",
+    accent: "from-blue-500 to-cyan-400",
+  },
+  {
+    number: "02",
+    title: "Measure What Matters",
+    subtitle: "Data-driven, leak-free validation",
+    description:
+      "Hype doesn't replace empirical evidence. I rely on disciplined cross-validation, confusion matrices, Macro F1, and objective metrics to ensure that a system actually performs in the real world.",
+    accent: "from-violet-500 to-indigo-400",
+  },
+  {
+    number: "03",
+    title: "Turn Ideas into Products",
+    subtitle: "Connecting intelligence with usability",
+    description:
+      "A machine learning model locked in a notebook creates zero user value. I connect mathematical models with robust backends and clean user interfaces to create software people can truly rely on.",
+    accent: "from-cyan-400 to-emerald-400",
+  },
+];
