@@ -1,10 +1,12 @@
 import React from 'react';
 import { PERSONAL_INFO } from '../data/portfolioData';
+import { SpotlightCard } from './SpotlightCard';
 import { GithubIcon } from './Icons';
 import { 
-  ExternalLink, 
   BookOpen, 
-  ArrowUpRight
+  ArrowUpRight,
+  Globe,
+  Sparkles
 } from 'lucide-react';
 
 export const GitHubSection: React.FC = () => {
@@ -12,13 +14,57 @@ export const GitHubSection: React.FC = () => {
     {
       name: 'AST_Audio_Classification',
       description:
-        'Audio classification system built using Audio Spectrogram Transformer (AST) to recognize acoustic events from 16 kHz resampled recordings. Macro F1: 0.84172.',
-      language: 'Python',
+        'Audio classification system built using Audio Spectrogram Transformer (AST) to recognize acoustic events from 16 kHz resampled recordings. Verified Macro F1: 0.84172.',
+      language: 'Python / PyTorch',
       langColor: '#3572A5',
-      topics: ['pytorch', 'audio-spectrogram-transformer', 'huggingface', 'deep-learning', 'librosa'],
-      url: 'https://huggingface.co/spaces/arjitja/AST_Audio_Classification',
-      isDemo: true,
-      demoLabel: 'Hugging Face Space',
+      topics: ['pytorch', 'audio-transformer', 'huggingface', 'deep-learning', 'librosa'],
+      repoUrl: PERSONAL_INFO.github,
+      liveUrl: 'https://huggingface.co/spaces/arjitja/AST_Audio_Classification',
+      liveLabel: 'Hugging Face Space',
+    },
+    {
+      name: 'NyayaMitra_Legal_AI',
+      description:
+        'Conversational AI legal assistant for Indian Law (BNS 2023 & IPC). Step-by-step roadmaps, FIR complaint drafting, and cyber fraud SOS.',
+      language: 'TypeScript / React',
+      langColor: '#3178C6',
+      topics: ['legal-ai', 'bns-2023', 'ipc', 'nextjs', 'tailwind', 'vercel'],
+      repoUrl: PERSONAL_INFO.github,
+      liveUrl: 'https://nyayamitra-liard.vercel.app',
+      liveLabel: 'Live App on Vercel',
+    },
+    {
+      name: 'AgriAI_Intelligence_System',
+      description:
+        'Automated agriculture intelligence pipeline integrating live OpenWeatherMap climate, Agmarknet wholesale mandi prices, and OpenAI GPT-4o advice.',
+      language: 'TypeScript / React',
+      langColor: '#3178C6',
+      topics: ['agritech', 'openai-gpt4o', 'agmarknet-mandi', 'computer-vision', 'kisan-vaani'],
+      repoUrl: PERSONAL_INFO.github,
+      liveUrl: 'https://agri-intelligence-system.vercel.app',
+      liveLabel: 'Live App on Vercel',
+    },
+    {
+      name: 'FinSaathi_Financial_Coach',
+      description:
+        'AI personal finance coach for Indian families featuring financial health scoring, 50-30-20 budget planning, and savings forecasting in INR.',
+      language: 'JavaScript / React',
+      langColor: '#F7DF1E',
+      topics: ['fintech', 'budget-coach', '50-30-20-rule', 'analytics', 'vercel'],
+      repoUrl: PERSONAL_INFO.github,
+      liveUrl: 'https://finsaathi-ten.vercel.app',
+      liveLabel: 'Live App on Vercel',
+    },
+    {
+      name: 'Vedic_Astrology_AI',
+      description:
+        'Multi-sign astronomical Vedic astrology engine analyzing Lagna, Surya Rashi, and Chandra Rashi with multilingual NLP and Voice AI.',
+      language: 'JavaScript / Python',
+      langColor: '#F7DF1E',
+      topics: ['astronomy', 'vedic-astrology', 'multilingual-nlp', 'voice-ai', 'sanskrit'],
+      repoUrl: PERSONAL_INFO.github,
+      liveUrl: 'https://vedic-astrology-rashi-fal.vercel.app',
+      liveLabel: 'Live App on Vercel',
     },
     {
       name: 'Placement_Portal',
@@ -27,28 +73,9 @@ export const GitHubSection: React.FC = () => {
       language: 'Python / Vue.js',
       langColor: '#41B883',
       topics: ['flask', 'vuejs', 'sqlite', 'sqlalchemy', 'jwt-auth', 'bootstrap'],
-      url: PERSONAL_INFO.github,
-      isDemo: false,
-    },
-    {
-      name: 'ML_Kaggle_Competitions',
-      description:
-        'Modular competitive machine learning workflows featuring stratified cross-validation, leak-free feature engineering, and GBDT ensemble models.',
-      language: 'Python / Jupyter',
-      langColor: '#DA5B0B',
-      topics: ['lightgbm', 'xgboost', 'scikit-learn', 'pandas', 'feature-engineering', 'kaggle'],
-      url: PERSONAL_INFO.github,
-      isDemo: false,
-    },
-    {
-      name: 'Klyro_AI_Assistant',
-      description:
-        'Conversational AI assistant exploring memory buffers, structured prompt engineering pipelines, and modular tool integrations.',
-      language: 'Python',
-      langColor: '#3572A5',
-      topics: ['llm-apis', 'fastapi', 'prompt-engineering', 'nlp', 'vector-retrieval'],
-      url: PERSONAL_INFO.github,
-      isDemo: false,
+      repoUrl: PERSONAL_INFO.github,
+      liveUrl: undefined,
+      liveLabel: undefined,
     },
   ];
 
@@ -61,13 +88,13 @@ export const GitHubSection: React.FC = () => {
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 dark:bg-white/10 border border-slate-700 dark:border-white/20 text-slate-700 dark:text-slate-300 text-xs font-mono uppercase tracking-wider mb-4">
               <GithubIcon className="w-3.5 h-3.5" />
-              Open Source &amp; Code Repositories
+              Open Source &amp; Deployed Apps
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 dark:text-white leading-tight">
-              Development &amp; <span className="text-gradient-ai">GitHub Repositories</span>
+              Development &amp; <span className="text-gradient-ai">Live Deployments</span>
             </h2>
             <p className="mt-3 text-slate-600 dark:text-slate-400 text-base">
-              Explore source code, transformer implementations, full-stack backends, and data science notebooks on GitHub.
+              Explore source code repositories, transformer architectures, and live production deployments on Vercel and Hugging Face.
             </p>
           </div>
 
@@ -83,77 +110,99 @@ export const GitHubSection: React.FC = () => {
           </a>
         </div>
 
-        {/* Curated Repositories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Curated Repositories Grid with Spotlight */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {curatedRepos.map((repo) => (
-            <div
+            <SpotlightCard
               key={repo.name}
-              className="glass-panel p-6 sm:p-7 rounded-2xl border border-slate-200 dark:border-white/10 hover:border-brand-blue/40 transition-all flex flex-col justify-between group"
+              spotlightColor="rgba(59, 130, 246, 0.18)"
+              className="glass-panel p-6 sm:p-7 border border-slate-200 dark:border-white/10 hover:border-brand-blue/40 transition-all flex flex-col justify-between group shadow-md"
             >
-              <div>
-                {/* Repo Header */}
-                <div className="flex items-center justify-between gap-3 mb-3">
-                  <div className="flex items-center gap-2 min-w-0">
-                    <BookOpen className="w-4 h-4 text-brand-blue shrink-0" />
-                    <a
-                      href={repo.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-mono font-bold text-base text-slate-900 dark:text-white group-hover:text-brand-blue transition-colors truncate"
-                    >
-                      {repo.name}
-                    </a>
+              <div className="flex flex-col h-full justify-between">
+                <div>
+                  {/* Repo Header */}
+                  <div className="flex items-center justify-between gap-3 mb-3">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <BookOpen className="w-4 h-4 text-brand-blue shrink-0" />
+                      <a
+                        href={repo.liveUrl || repo.repoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-mono font-bold text-sm sm:text-base text-slate-900 dark:text-white group-hover:text-brand-blue transition-colors truncate"
+                      >
+                        {repo.name}
+                      </a>
+                    </div>
+
+                    <div className="flex items-center gap-1.5 shrink-0">
+                      {repo.liveUrl && (
+                        <a
+                          href={repo.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 transition-colors"
+                          title="Open Live App"
+                        >
+                          <Globe className="w-3.5 h-3.5" />
+                        </a>
+                      )}
+                      <a
+                        href={repo.repoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-1.5 rounded-lg bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-600 dark:text-slate-400 transition-colors"
+                        title="GitHub Repo"
+                      >
+                        <GithubIcon className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
                   </div>
 
-                  <a
-                    href={repo.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-1.5 rounded-lg bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-600 dark:text-slate-400 transition-colors"
-                    aria-label={`Open ${repo.name}`}
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
+                  {/* Description */}
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4 line-clamp-3">
+                    {repo.description}
+                  </p>
+
+                  {/* Topics / Tags */}
+                  <div className="flex flex-wrap gap-1.5 mb-5">
+                    {repo.topics.slice(0, 4).map((topic) => (
+                      <span
+                        key={topic}
+                        className="text-[11px] font-mono px-2 py-0.5 rounded-md bg-brand-blue/5 text-blue-600 dark:text-cyan-400/90 border border-brand-blue/15"
+                      >
+                        #{topic}
+                      </span>
+                    ))}
+                  </div>
                 </div>
 
-                {/* Description */}
-                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-5">
-                  {repo.description}
-                </p>
-
-                {/* Topics / Tags */}
-                <div className="flex flex-wrap gap-1.5 mb-6">
-                  {repo.topics.map((topic) => (
+                {/* Repo Footer Info */}
+                <div className="pt-4 border-t border-slate-100 dark:border-white/10 flex items-center justify-between text-xs font-mono text-slate-500 dark:text-slate-400 mt-auto">
+                  <div className="flex items-center gap-2">
                     <span
-                      key={topic}
-                      className="text-[11px] font-mono px-2 py-0.5 rounded-md bg-brand-blue/5 text-blue-600 dark:text-cyan-400/90 border border-brand-blue/15"
+                      className="w-2.5 h-2.5 rounded-full"
+                      style={{ backgroundColor: repo.langColor }}
+                    />
+                    <span>{repo.language}</span>
+                  </div>
+
+                  {repo.liveUrl ? (
+                    <a
+                      href={repo.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-emerald-500 dark:text-emerald-400 font-semibold flex items-center gap-1 hover:underline"
                     >
-                      #{topic}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Repo Footer Info */}
-              <div className="pt-4 border-t border-slate-100 dark:border-white/10 flex items-center justify-between text-xs font-mono text-slate-500 dark:text-slate-400">
-                <div className="flex items-center gap-2">
-                  <span
-                    className="w-2.5 h-2.5 rounded-full"
-                    style={{ backgroundColor: repo.langColor }}
-                  />
-                  <span>{repo.language}</span>
+                      <Sparkles className="w-3 h-3" />
+                      <span>{repo.liveLabel}</span>
+                    </a>
+                  ) : (
+                    <span className="text-slate-400">Public Repo</span>
+                  )}
                 </div>
 
-                {repo.isDemo ? (
-                  <span className="text-yellow-500 dark:text-yellow-400 font-semibold flex items-center gap-1">
-                    <span>{repo.demoLabel}</span>
-                  </span>
-                ) : (
-                  <span className="text-slate-400">Public Repository</span>
-                )}
               </div>
-
-            </div>
+            </SpotlightCard>
           ))}
         </div>
 

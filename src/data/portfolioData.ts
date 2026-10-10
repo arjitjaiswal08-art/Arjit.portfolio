@@ -10,6 +10,7 @@ export interface Project {
   liveUrl?: string;
   githubUrl?: string;
   huggingfaceUrl?: string;
+  image?: string;
   featured: boolean;
   type: 'Featured Project' | 'Production Application' | 'Prototype' | 'Concept' | 'Research';
   caseStudy: {
@@ -61,7 +62,7 @@ export const PERSONAL_INFO = {
   subheadline:
     "I’m Arjit Jaiswal — an AI-focused developer working across machine learning, generative AI, and full-stack engineering. I turn ideas into practical products, train models on real-world data, and build applications that connect intelligence with usability.",
   status: "Open to AI/ML internships, research & product collaborations",
-  email: "arjitjaiswal.ai@gmail.com", // easily configurable
+  email: "arjitjaiswal.ai@gmail.com",
   github: "https://github.com/Arjit077",
   linkedin: "https://www.linkedin.com/in/j-arjit/",
   huggingface: "https://huggingface.co/spaces/arjitja/AST_Audio_Classification",
@@ -112,6 +113,229 @@ export const FEATURED_PROJECTS: Project[] = [
     },
   },
   {
+    id: "nyayamitra",
+    title: "NyayaMitra (न्यायमित्र)",
+    category: "ai-ml",
+    badge: "Live Deployed AI App",
+    tagline: "AI Legal Assistant for Indian Law compliant with Bharatiya Nyaya Sanhita (BNS 2023) & IPC",
+    description:
+      "A conversational AI legal intelligence application empowering Indian citizens to describe legal problems in simple words. Features instant legal risk analysis, step-by-step action roadmaps, formal FIR drafting, cyber fraud SOS, evidence locker, case strength analysis, and contract scanning.",
+    stack: ["React", "Generative AI", "BNS 2023 & IPC", "Legal NLP", "Tailwind CSS", "Vercel"],
+    metrics: [
+      { label: "Legal Framework", value: "BNS 2023 & IPC" },
+      { label: "Workspaces", value: "6 Workspaces" },
+      { label: "Deployment", value: "Live on Vercel" },
+      { label: "Assistance", value: "FIR & Cyber SOS" },
+    ],
+    liveUrl: "https://nyayamitra-liard.vercel.app",
+    githubUrl: "https://github.com/Arjit077",
+    image: "/projects/nyayamitra.png",
+    featured: true,
+    type: "Production Application",
+    caseStudy: {
+      problem:
+        "Navigating Indian legal frameworks (the new BNS 2023 and IPC) is daunting for common citizens. People facing cyber fraud, extortion, or property disputes lack affordable, instant legal guidance and struggle to draft police complaints or preserve digital evidence.",
+      approach:
+        "Engineered an interactive conversational legal assistant powered by structured prompt engineering, statutory grounding (BNS & IPC), multi-lingual understanding, and dedicated workflows for FIR drafting, scam radars, and evidence preservation.",
+      technicalDetails: [
+        "Natural language legal problem intake with high-risk urgency classification.",
+        "Structured FIR complaint generator with jurisdictional formatting and IPC/BNS section cross-referencing.",
+        "Cyber Fraud SOS emergency workspace with step-by-step reporting instructions.",
+        "Evidence locker and case viability estimator to assess dispute strength.",
+        "Deployed as a blazing fast web application on Vercel.",
+      ],
+      results:
+        "Successfully deployed and accessible to users at nyayamitra-liard.vercel.app, translating dense legal codes into plain-language actionable steps.",
+      realWorldImpact:
+        "Democratizes legal access across India, protects victims of digital financial fraud, and saves crucial hours when filing first information reports.",
+    },
+  },
+  {
+    id: "agri-ai",
+    title: "AgriAI — Intelligence System",
+    category: "ai-ml",
+    badge: "Live Deployed AI App",
+    tagline: "End-to-End AI Agriculture Advisory & Decision Platform for Indian Farmers",
+    description:
+      "A complete smart agriculture system that automates the decision journey: auto-fetching live micro-climate via OpenWeatherMap, live APMC Mandi commodity prices via Agmarknet, plant symptom & disease diagnosis, and OpenAI GPT-4o powered farming guidance with Kisan Vaani (किसान वाणी) voice.",
+    stack: ["OpenAI GPT-4o", "Computer Vision", "Agmarknet API", "OpenWeatherMap", "React", "Vercel"],
+    metrics: [
+      { label: "Decision Engine", value: "OpenAI GPT-4o" },
+      { label: "Live Mandi", value: "Agmarknet APMC" },
+      { label: "Voice Support", value: "Kisan Vaani" },
+      { label: "Deployment", value: "Live on Vercel" },
+    ],
+    liveUrl: "https://agri-intelligence-system.vercel.app",
+    githubUrl: "https://github.com/Arjit077",
+    image: "/projects/agri-ai.png",
+    featured: true,
+    type: "Production Application",
+    caseStudy: {
+      problem:
+        "Indian smallholder farmers face severe crop losses and unfair market prices due to fragmented information across weather hazards, plant diseases, and daily local APMC Mandi price fluctuations.",
+      approach:
+        "Built a unified, automated 5-step agricultural intelligence pipeline connecting real-time weather APIs, official Agmarknet wholesale market feeds, visual plant pathology diagnostics, and multi-lingual voice guidance.",
+      technicalDetails: [
+        "End-to-end smart decision flow: Crop + GPS Location + Plant Photo -> Integrated Action Plan.",
+        "Automated live APMC Mandi wholesale price extraction and commodity trend calculation.",
+        "Plant leaf disease detection module analyzing visual pathology and pathogen indicators.",
+        "Kisan Vaani (किसान वाणी) voice accessibility module designed for vernacular language accessibility.",
+        "High-performance cloud deployment on Vercel with responsive mobile-first UI.",
+      ],
+      results:
+        "Fully deployed and functional at agri-intelligence-system.vercel.app, delivering instantaneous agronomic recommendations and live market intelligence.",
+      realWorldImpact:
+        "Protects farm yields, optimizes fertilizer expenditures, and empowers farmers with transparency to sell at peak market rates.",
+    },
+  },
+  {
+    id: "finsaathi",
+    title: "FinSaathi — AI Financial Coach",
+    category: "fullstack",
+    badge: "Live Deployed AI App",
+    tagline: "AI-Powered Personal Financial Coach and 50-30-20 Budget Planner for Indian Families",
+    description:
+      "An intuitive personal finance application tailored for Indian households. Users input income, recurring expenses, and aspirations to instantly receive comprehensive financial health scores, tailored 50-30-20 budget advice, and actionable savings plans in Indian Rupees (₹).",
+    stack: ["React", "AI Financial Insights", "50-30-20 Rule", "Interactive Analytics", "Tailwind CSS", "Vercel"],
+    metrics: [
+      { label: "Health Score", value: "0 - 100 Meter" },
+      { label: "Target Audience", value: "Indian Families" },
+      { label: "Currency", value: "INR (₹)" },
+      { label: "Deployment", value: "Live on Vercel" },
+    ],
+    liveUrl: "https://finsaathi-ten.vercel.app",
+    githubUrl: "https://github.com/Arjit077",
+    image: "/projects/finsaathi.png",
+    featured: true,
+    type: "Production Application",
+    caseStudy: {
+      problem:
+        "Most personal budgeting tools are overly complex, priced in foreign currencies, and fail to reflect Indian financial realities such as joint family expenses, emergency funds, and festive seasonal savings.",
+      approach:
+        "Architected FinSaathi with a clean dark-mode interface, instantaneous financial health diagnostic scoring, dynamic savings projections, and localized 50-30-20 financial breakdowns.",
+      technicalDetails: [
+        "Interactive income-to-expense ratio analyzer with visual health meter scoring.",
+        "Algorithmic savings target tracker estimating timeline to major family milestones.",
+        "Actionable AI-generated monthly budget recommendations categorized by essentials, wants, and savings.",
+        "Clean, responsive UI with smooth transitions and zero latency on Vercel.",
+      ],
+      results:
+        "Active deployment at finsaathi-ten.vercel.app delivering seamless financial health assessments in under 60 seconds.",
+      realWorldImpact:
+        "Promotes disciplined savings habits, clarifies recurring expense leakages, and builds financial security for Indian families.",
+    },
+  },
+  {
+    id: "healthcare",
+    title: "HealthCARE — Clinical Intelligence",
+    category: "fullstack",
+    badge: "Live Deployed Web App",
+    tagline: "Next-Gen Clinical Excellence, Specialist Finder & Patient Care Portal",
+    description:
+      "A modern digital health application combining clinical specialist directories with AI-predicted health trend analytics. Features specialist consultation bookings, empathetic care pathways, diagnostic precision overviews, and mobile clinical telemedicine workflows.",
+    stack: ["React", "Clinical AI Insights", "Specialist Directory", "Responsive UI", "Tailwind CSS", "Vercel"],
+    metrics: [
+      { label: "Satisfaction", value: "94% Patient Trend" },
+      { label: "Services", value: "Clinical Network" },
+      { label: "Deployment", value: "Live on Vercel" },
+      { label: "Design", value: "Clean Healthcare UI" },
+    ],
+    liveUrl: "https://healthcare-finder.vercel.app",
+    githubUrl: "https://github.com/Arjit077",
+    image: "/projects/healthcare.png",
+    featured: true,
+    type: "Production Application",
+    caseStudy: {
+      problem:
+        "Patients struggle to find verified clinical specialists matched to their symptoms and navigate complex appointment workflows with clear insight into care expectations.",
+      approach:
+        "Designed a high-trust, responsive clinical care portal with smart specialty filtering, AI-assisted health trend summaries, and streamlined consultation booking.",
+      technicalDetails: [
+        "Specialist discovery engine filtering by medical discipline and availability.",
+        "Smart clinical insights card summarizing predicted patient recovery and diagnostic metrics.",
+        "Accessible, high-contrast healthcare UI optimized for both elderly and mobile users.",
+        "Live deployment on Vercel with smooth navigation and instant search.",
+      ],
+      results:
+        "Live and accessible at healthcare-finder.vercel.app, demonstrating clean healthcare system design and intuitive appointment booking.",
+      realWorldImpact:
+        "Reduces friction in scheduling specialist medical appointments and fosters patient peace of mind through empathetic digital design.",
+    },
+  },
+  {
+    id: "vedic-astrology",
+    title: "Vedic Astrology AI Engine (वैदिकज्योतिषं)",
+    category: "ai-ml",
+    badge: "Live Deployed AI App",
+    tagline: "Advanced Multi-Sign Astronomical Vedic Astrology & Voice AI Engine",
+    description:
+      "An intelligent synthesis system executing complex astronomical ephemeris computations to analyze Lagna (Ascendant), Surya Rashi (Sun Sign), and Chandra Rashi (Moon Sign). Features natural language query analysis, Voice AI Assistant, and multi-lingual astrological interpretations in Sanskrit, Hindi, Tamil, Telugu, and English.",
+    stack: ["Algorithmic Astronomical Models", "Voice AI", "Multilingual NLP", "Vedic Mathematics", "React", "Vercel"],
+    metrics: [
+      { label: "Synthesis", value: "3-Sign AI Engine" },
+      { label: "Languages", value: "Sanskrit, Hindi, EN" },
+      { label: "Features", value: "Voice AI Assistant" },
+      { label: "Deployment", value: "Live on Vercel" },
+    ],
+    liveUrl: "https://vedic-astrology-rashi-fal.vercel.app",
+    githubUrl: "https://github.com/Arjit077",
+    image: "/projects/vedic-astrology.png",
+    featured: true,
+    type: "Production Application",
+    caseStudy: {
+      problem:
+        "Traditional Vedic astrology systems rely solely on simplistic single sun-sign horoscopes or require complex manual ephemeris table lookups that ordinary users cannot interpret or query naturally.",
+      approach:
+        "Engineered an Advanced 3-Sign Synthesis Engine (Lagna, Surya Rashi, Chandra Rashi) paired with natural language understanding and voice input to deliver contextual astrological analysis in classical Sanskrit and modern regional languages.",
+      technicalDetails: [
+        "Planetary ephemeris translation into twelve astrological houses and lunar mansions (Nakshatras).",
+        "Natural language query analyzer routing user life questions (career, health, relationships) to astrological planetary transit models.",
+        "Integrated Voice AI Assistant for spoken audio queries.",
+        "Multilingual localization supporting Sanskrit (संस्कृतम्), Hindi, Tamil, Telugu, and English.",
+      ],
+      results:
+        "Live and operational at vedic-astrology-rashi-fal.vercel.app with interactive sign selectors and real-time horoscope generation.",
+      realWorldImpact:
+        "Bridges ancient Indian astronomical sciences with modern AI natural language processing and voice interaction.",
+    },
+  },
+  {
+    id: "placement-portal",
+    title: "Campus Placement Portal",
+    category: "fullstack",
+    badge: "Full-Stack Enterprise Platform",
+    tagline: "Multi-role recruitment platform streamlining campus hiring between Admins, Companies, and Students",
+    description:
+      "A complete enterprise web application designed to eliminate recruitment bottlenecks by managing job drives, student candidacies, approval lifecycles, and resume applications with strict role-based access control.",
+    stack: ["Flask", "Python", "Vue.js", "JavaScript", "SQLAlchemy", "SQLite", "JWT Auth", "Bootstrap 5", "HTML5"],
+    metrics: [
+      { label: "Architecture", value: "REST API + SPA" },
+      { label: "Access Roles", value: "Admin, Co., Student" },
+      { label: "Security", value: "JWT Tokens & Bcrypt" },
+      { label: "Database", value: "Relational ORM" },
+    ],
+    githubUrl: "https://github.com/Arjit077",
+    featured: true,
+    type: "Production Application",
+    caseStudy: {
+      problem:
+        "University placement drives involve disjointed manual coordination between administrators verifying company credentials, companies posting job drives with eligibility criteria, and hundreds of students tracking application stages.",
+      approach:
+        "Engineered a full-stack platform featuring granular Role-Based Access Control (RBAC), declarative ORM relationships, automated validation rules, and intuitive reactive dashboards for each user archetype.",
+      technicalDetails: [
+        "Role-Based Authentication: Secure JWT-backed authentication with refresh flows and role permission middleware.",
+        "Company Approval Lifecycle: Admin dashboard for reviewing company registrations, approving/rejecting drive postings.",
+        "Drive Eligibility Engine: Dynamic filtering matching student GPA/branch criteria against job prerequisites.",
+        "Application State Machine: Transparent progression (Applied -> Shortlisted -> Interviewed -> Selected).",
+        "Resume Management: Secure resume PDF uploads, server validation, and candidate profile view.",
+      ],
+      results:
+        "Delivered an intuitive, responsive end-to-end recruitment management portal handling the complete placement cycle.",
+      realWorldImpact:
+        "Eliminates administrative overhead, prevents duplicate filings, and provides students and recruiters with live status transparency.",
+    },
+  },
+  {
     id: "kaggle-ml",
     title: "Machine Learning Competition Pipelines",
     category: "ai-ml",
@@ -145,42 +369,6 @@ export const FEATURED_PROJECTS: Project[] = [
         "Consistent validation performance gains over baseline models through rigorous out-of-fold calibration and leak-free transformations.",
       realWorldImpact:
         "Directly translates to real-world business tabular data: customer churn prediction, credit risk scoring, fraud detection, and demand forecasting.",
-    },
-  },
-  {
-    id: "placement-portal",
-    title: "Campus Placement Portal",
-    category: "fullstack",
-    badge: "Production Full-Stack Platform",
-    tagline: "Multi-role recruitment platform streamlining campus hiring between Admins, Companies, and Students",
-    description:
-      "A complete enterprise web application designed to eliminate recruitment bottlenecks by managing job drives, student candidacies, approval lifecycles, and resume applications with strict role-based access control.",
-    stack: ["Flask", "Python", "Vue.js", "JavaScript", "SQLAlchemy", "SQLite", "JWT Auth", "Bootstrap 5", "HTML5"],
-    metrics: [
-      { label: "Architecture", value: "REST API + SPA" },
-      { label: "Access Roles", value: "Admin, Co., Student" },
-      { label: "Security", value: "JWT Tokens & Bcrypt" },
-      { label: "Database", value: "Relational ORM" },
-    ],
-    githubUrl: "https://github.com/Arjit077",
-    featured: true,
-    type: "Production Application",
-    caseStudy: {
-      problem:
-        "University placement drives involve disjointed manual coordination between administrators verifying company credentials, companies posting job drives with eligibility criteria, and hundreds of students tracking application stages.",
-      approach:
-        "Engineered a full-stack platform featuring granular Role-Based Access Control (RBAC), declarative ORM relationships, automated validation rules, and intuitive reactive dashboards for each user archetype.",
-      technicalDetails: [
-        "Role-Based Authentication: Secure JWT-backed authentication with refresh flows and role permission middleware.",
-        "Company Approval Lifecycle: Admin dashboard for reviewing company registrations, approving/rejecting drive postings.",
-        "Drive Eligibility Engine: Dynamic filtering matching student GPA/branch criteria against job prerequisites.",
-        "Application State Machine: Transparent progression (Applied -> Shortlisted -> Interviewed -> Selected).",
-        "Resume Management: Secure resume PDF uploads, server validation, and candidate profile view.",
-      ],
-      results:
-        "Delivered an intuitive, responsive end-to-end recruitment management portal handling the complete placement cycle.",
-      realWorldImpact:
-        "Eliminates administrative overhead, prevents duplicate filings, and provides students and recruiters with live status transparency.",
     },
   },
   {
@@ -234,7 +422,7 @@ export const FEATURED_PROJECTS: Project[] = [
       { label: "Philosophy", value: "Product First" },
     ],
     githubUrl: "https://github.com/Arjit077",
-    featured: true,
+    featured: false,
     type: "Prototype",
     caseStudy: {
       problem:
@@ -253,48 +441,10 @@ export const FEATURED_PROJECTS: Project[] = [
     },
   },
   {
-    id: "financial-budgeting",
-    title: "Personal Financial Planning & Budgeting System",
-    category: "fullstack",
-    badge: "Full-Stack Prototype",
-    tagline: "Smart expense tracking, categorical budgeting, and financial trajectory projection",
-    description:
-      "A personal finance management web application featuring interactive cash-flow visualization, expense categorization, budget thresholds, and historical spending analytics.",
-    stack: ["Python", "Flask", "JavaScript", "SQLite", "Chart.js", "Bootstrap"],
-    featured: false,
-    type: "Prototype",
-    caseStudy: {
-      problem: "Users struggle to track scattered expenses and project long-term savings goals effectively.",
-      approach: "Built clean ledger architecture with automatic category aggregation and visual budget meters.",
-      technicalDetails: ["RESTful transaction APIs", "Dynamic charting with Chart.js", "Monthly budget variance computation"],
-      results: "Functional dashboard providing instant insights into recurring spending leaks.",
-      realWorldImpact: "Fosters financial literacy and disciplined personal savings habits."
-    }
-  },
-  {
-    id: "agri-ai",
-    title: "AI Agricultural Intelligence & Crop Health",
-    category: "ai-ml",
-    badge: "AI Concept & Research",
-    tagline: "Exploring computer vision and sensor telemetry for precision agriculture and early disease detection",
-    description:
-      "A research concept investigating convolutional neural networks for leaf disease classification combined with weather telemetry to advise smallholder farmers.",
-    stack: ["Python", "PyTorch", "Computer Vision Concepts", "Data Analysis", "Sensor Telemetry"],
-    featured: false,
-    type: "Concept",
-    caseStudy: {
-      problem: "Crop diseases cause massive yield losses when detected too late in the cultivation cycle.",
-      approach: "Conceptualized a mobile-accessible CNN model trained on plant pathology datasets.",
-      technicalDetails: ["Transfer learning on MobileNet/ResNet architectures", "Offline inference considerations for low-bandwidth rural areas"],
-      results: "Architectural blueprint and data exploration for low-latency crop health diagnostics.",
-      realWorldImpact: "Empowers rural farmers with immediate agronomic guidance to protect crops."
-    }
-  },
-  {
     id: "cyber-scam-detection",
     title: "Cybersecurity & Scam Detection Engine",
     category: "ai-ml",
-    badge: "NLP & Security Concept",
+    badge: "NLP & Security",
     tagline: "Heuristic and NLP-based detection of phishing messages, social engineering, and fraudulent URLs",
     description:
       "An intelligent scam detection prototype that analyzes message semantics, suspicious lexical patterns, and domain reputations to flag fraudulent communications.",
@@ -307,63 +457,6 @@ export const FEATURED_PROJECTS: Project[] = [
       technicalDetails: ["Entropy analysis of URL domains", "Sentiment and urgency polarity extraction", "Lightweight classifier for edge deployment"],
       results: "High-precision prototype capable of identifying urgency-driven phishing hooks.",
       realWorldImpact: "Protects digital banking users from financial fraud and identity theft."
-    }
-  },
-  {
-    id: "legal-ai-prototype",
-    title: "AI Legal Assistance & Document RAG Prototype",
-    category: "ai-ml",
-    badge: "NLP & RAG Prototype",
-    tagline: "Retrieval-Augmented Generation prototype for statutory lookup and contract analysis",
-    description:
-      "An experimental legal tech application exploring semantic search, chunking strategies, and LLM-assisted summaries for dense legal documentation.",
-    stack: ["Python", "LangChain Concepts", "Vector Embeddings", "FastAPI", "Prompt Engineering"],
-    featured: false,
-    type: "Prototype",
-    caseStudy: {
-      problem: "Navigating hundreds of pages of legal statutes and contracts is time-prohibitive for non-lawyers.",
-      approach: "Implemented a RAG pipeline chunking documents and retrieving relevant statutory clauses via cosine similarity.",
-      technicalDetails: ["Hierarchical document chunking", "Embedding generation", "Grounded generation to prevent hallucinations"],
-      results: "Accurate citation-backed summaries of contractual clauses and statutory provisions.",
-      realWorldImpact: "Democratizes access to legal understanding for startups and individuals."
-    }
-  },
-  {
-    id: "vedic-astrology",
-    title: "Vedic Astrology Calculation Engine",
-    category: "fullstack",
-    badge: "Algorithmic Prototype",
-    tagline: "Precise astronomical calculations, planetary ephemeris mapping, and Vedic chart generation",
-    description:
-      "A computational engine implementing traditional Vedic astrological algorithms (Kundali, planetary positions, Dasha timelines) using astronomical coordinates.",
-    stack: ["Python", "JavaScript", "Mathematical Modeling", "SVG Chart Rendering", "Algorithms"],
-    featured: false,
-    type: "Prototype",
-    caseStudy: {
-      problem: "Traditional astrological systems require complex mathematical projections of planetary ephemeris coordinates onto zodiacal houses.",
-      approach: "Engineered mathematical algorithms calculating ascendants and planetary longitudes based on timestamp and geographic coordinates.",
-      technicalDetails: ["Ephemeris coordinate translation", "Dynamic SVG natal chart rendering", "Dasha timeline calculations"],
-      results: "High-precision algorithmic generation of North & South Indian astrological charts.",
-      realWorldImpact: "Merges cultural computational heritage with modern mathematical software design."
-    }
-  },
-  {
-    id: "rural-shop-pos",
-    title: "Rural Shop Management & Digital Bookkeeping",
-    category: "fullstack",
-    badge: "Full-Stack Prototype",
-    tagline: "Lightweight, offline-friendly inventory tracking and ledger management for micro-retailers",
-    description:
-      "A pragmatic digital bookkeeping solution tailored for small rural shopkeepers, providing credit ledger (Khata) tracking, inventory alerts, and simple sales logging.",
-    stack: ["Python", "Flask", "SQLite", "JavaScript", "HTML5", "Responsive CSS"],
-    featured: false,
-    type: "Prototype",
-    caseStudy: {
-      problem: "Small neighborhood retailers often rely on manual paper notebooks, leading to uncollected credits and untracked inventory spoilage.",
-      approach: "Built an ultra-fast, minimal digital ledger with high-contrast UI and WhatsApp receipt generation.",
-      technicalDetails: ["Optimized relational schemas", "Credit balance tracking with automatic reminders", "Low-bandwidth responsive design"],
-      results: "Reliable, intuitive bookkeeping interface tested for rapid checkout flows.",
-      realWorldImpact: "Brings modern digital accounting to grassroots micro-enterprises."
     }
   },
   {
@@ -383,6 +476,25 @@ export const FEATURED_PROJECTS: Project[] = [
       technicalDetails: ["Concurrent slot reservation handling", "Trail status and weather advisory feeds", "Equipment checkout tracking"],
       results: "Robust prototypes delivering seamless operational workflows for both use cases.",
       realWorldImpact: "Streamlines municipal parking efficiency and outdoor adventure safety."
+    }
+  },
+  {
+    id: "rural-shop-pos",
+    title: "Rural Shop Management & Digital Bookkeeping",
+    category: "fullstack",
+    badge: "Full-Stack Prototype",
+    tagline: "Lightweight, offline-friendly inventory tracking and ledger management for micro-retailers",
+    description:
+      "A pragmatic digital bookkeeping solution tailored for small rural shopkeepers, providing credit ledger (Khata) tracking, inventory alerts, and simple sales logging.",
+    stack: ["Python", "Flask", "SQLite", "JavaScript", "HTML5", "Responsive CSS"],
+    featured: false,
+    type: "Prototype",
+    caseStudy: {
+      problem: "Small neighborhood retailers often rely on manual paper notebooks, leading to uncollected credits and untracked inventory spoilage.",
+      approach: "Built an ultra-fast, minimal digital ledger with high-contrast UI and WhatsApp receipt generation.",
+      technicalDetails: ["Optimized relational schemas", "Credit balance tracking with automatic reminders", "Low-bandwidth responsive design"],
+      results: "Reliable, intuitive bookkeeping interface tested for rapid checkout flows.",
+      realWorldImpact: "Brings modern digital accounting to grassroots micro-enterprises."
     }
   }
 ];
@@ -469,8 +581,8 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
     title: "Deployment & Platforms",
     description: "Cloud hosting environments and interactive model spaces",
     skills: [
-      { name: "Hugging Face Spaces", highlight: true },
       { name: "Vercel", highlight: true },
+      { name: "Hugging Face Spaces", highlight: true },
       { name: "Render", highlight: true },
       { name: "Kaggle Notebooks", highlight: true },
     ],
@@ -491,6 +603,20 @@ export const EXPERIENCE_MILESTONES: ExperienceItem[] = [
       "Deployed an interactive model demonstration on Hugging Face Spaces.",
     ],
     technologies: ["PyTorch", "Hugging Face", "Librosa", "Torchaudio", "Python"],
+  },
+  {
+    period: "2024 - Present",
+    role: "Applied AI Full-Stack Production Deployments",
+    domain: "Generative AI, Web Systems & Domain Applications",
+    summary:
+      "Engineered and deployed production AI applications on Vercel across legal intelligence (NyayaMitra), precision agriculture (AgriAI), family financial coaching (FinSaathi), clinical telemedicine (HealthCARE), and multi-sign Vedic astrology.",
+    deliverables: [
+      "Built NyayaMitra (BNS 2023 & IPC compliant AI legal advisor) with FIR generator and cyber fraud radar.",
+      "Developed AgriAI integrating real-time Agmarknet mandi prices, OpenWeatherMap telemetry, and OpenAI GPT-4o decisioning.",
+      "Created FinSaathi for 50-30-20 rule budget coaching and savings forecasting in INR.",
+      "Engineered Vedic Astrology AI engine with multi-sign ephemeris synthesis and Voice AI.",
+    ],
+    technologies: ["React", "OpenAI GPT-4o", "Vercel", "Tailwind CSS", "REST APIs", "Python"],
   },
   {
     period: "2024 - Present",
@@ -519,19 +645,6 @@ export const EXPERIENCE_MILESTONES: ExperienceItem[] = [
       "Implemented resume upload handling, validation, and candidate status tracking.",
     ],
     technologies: ["Flask", "Vue.js", "Python", "SQLAlchemy", "JWT", "Bootstrap 5"],
-  },
-  {
-    period: "2024 - Present",
-    role: "AI Product Architecture & Explorations",
-    domain: "Generative AI, LLMs & Unica AI Initiative",
-    summary:
-      "Initiated Klyro AI and Unica AI to explore practical applied AI products, focusing on personal assistant architectures, RAG pipelines, and conversational interfaces.",
-    deliverables: [
-      "Prototyped prompt chains and semantic memory buffers for AI assistants.",
-      "Investigated RAG knowledge retrieval architectures for specialized documentation.",
-      "Built interactive proof-of-concept interfaces connecting LLM APIs with real tools.",
-    ],
-    technologies: ["LLM APIs", "FastAPI", "Prompt Engineering", "React", "Python"],
   },
 ];
 

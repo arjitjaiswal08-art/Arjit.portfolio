@@ -15,7 +15,8 @@ import {
   Compass, 
   ArrowRight, 
   Copy, 
-  Check
+  Check,
+  Globe
 } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
 
@@ -75,6 +76,14 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
     { label: 'Contact Section', icon: Mail, href: '#contact', section: 'Navigate' },
   ];
 
+  const liveApps = FEATURED_PROJECTS.filter((p) => Boolean(p.liveUrl));
+
+  const filteredLiveApps = liveApps.filter((p) =>
+    p.title.toLowerCase().includes(query.toLowerCase()) ||
+    p.stack.some((s) => s.toLowerCase().includes(query.toLowerCase())) ||
+    p.tagline.toLowerCase().includes(query.toLowerCase())
+  );
+
   const filteredProjects = FEATURED_PROJECTS.filter((p) =>
     p.title.toLowerCase().includes(query.toLowerCase()) ||
     p.stack.some((s) => s.toLowerCase().includes(query.toLowerCase())) ||
@@ -104,7 +113,7 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Type a command, project, or tech (e.g., PyTorch, AST, Resume)..."
+            placeholder="Type a command, app, or tech (e.g., NyayaMitra, AgriAI, FinSaathi)..."
             className="w-full bg-transparent text-sm text-white placeholder-slate-400 focus:outline-none font-mono"
           />
           <button
@@ -118,6 +127,38 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
         {/* Results List */}
         <div className="max-h-[60vh] overflow-y-auto p-3 space-y-4 font-mono text-xs">
           
+          {/* Live Deployed Apps Section */}
+          {filteredLiveApps.length > 0 && (
+            <div>
+              <div className="text-[10px] uppercase text-emerald-400 tracking-wider px-2 mb-1.5 font-bold flex items-center gap-1.5">
+                <Globe className="w-3 h-3" />
+                Live Deployed Applications ({filteredLiveApps.length})
+              </div>
+              <div className="space-y-1">
+                {filteredLiveApps.map((app) => (
+                  <a
+                    key={app.id}
+                    href={app.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={onClose}
+                    className="flex items-center justify-between p-2.5 rounded-lg hover:bg-emerald-500/15 hover:text-emerald-300 transition-colors group cursor-pointer border border-emerald-500/10 hover:border-emerald-500/30"
+                  >
+                    <div className="flex items-center gap-2.5 truncate">
+                      <Globe className="w-4 h-4 text-emerald-400 shrink-0" />
+                      <span className="font-semibold text-white group-hover:text-emerald-300 truncate">{app.title}</span>
+                      <span className="text-[10px] text-emerald-400/80 hidden sm:inline truncate">({app.badge})</span>
+                    </div>
+                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 shrink-0 flex items-center gap-1">
+                      <span>Launch App</span>
+                      <ExternalLink className="w-2.5 h-2.5" />
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Quick Actions */}
           <div>
             <div className="text-[10px] uppercase text-slate-500 tracking-wider px-2 mb-1.5 font-bold">
@@ -165,11 +206,11 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
             </div>
           </div>
 
-          {/* Projects */}
+          {/* All Projects with Case Studies */}
           {filteredProjects.length > 0 && (
             <div>
               <div className="text-[10px] uppercase text-slate-500 tracking-wider px-2 mb-1.5 font-bold">
-                Projects ({filteredProjects.length})
+                Project Case Studies ({filteredProjects.length})
               </div>
               <div className="space-y-1">
                 {filteredProjects.map((p) => (
@@ -263,7 +304,7 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
 
         {/* Footer Shortcut Bar */}
         <div className="px-4 py-2.5 border-t border-white/10 bg-black/40 flex items-center justify-between text-[11px] font-mono text-slate-500">
-          <span>Navigate with mouse or shortcuts</span>
+          <span>Click any live link to launch immediately</span>
           <div className="flex items-center gap-2">
             <span>Esc to exit</span>
           </div>

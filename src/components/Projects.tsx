@@ -9,13 +9,14 @@ import {
   Sparkles, 
   ChevronRight, 
   Plus, 
-  Minus,
-  Terminal,
-  Search,
-  Activity,
-  BarChart3,
-  Users,
-  Bot
+  Minus, 
+  Terminal, 
+  Search, 
+  Activity, 
+  BarChart3, 
+  Users, 
+  Bot, 
+  Globe
 } from 'lucide-react';
 
 interface ProjectsProps {
@@ -47,6 +48,50 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenCaseStudy }) => {
   const additionalPrototypes = filteredProjects.filter((p) => !p.featured);
 
   const renderProjectVisualHeader = (project: Project) => {
+    // If project has a real deployed screenshot, render an interactive browser window mockup
+    if (project.image) {
+      const displayDomain = project.liveUrl ? new URL(project.liveUrl).hostname : 'app.vercel.app';
+      return (
+        <div className="rounded-xl overflow-hidden border border-white/10 mb-5 group/img relative bg-slate-950">
+          {/* Browser Top Window Bar */}
+          <div className="bg-slate-900/90 px-3 py-2 border-b border-white/10 flex items-center justify-between text-[11px] font-mono text-slate-400">
+            <div className="flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+              <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
+              <span className="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
+              <span className="ml-2 text-slate-300 text-[10px] truncate max-w-[150px] sm:max-w-[200px]">
+                {displayDomain}
+              </span>
+            </div>
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="inline-flex items-center gap-1 text-[10px] text-emerald-400 hover:text-emerald-300 font-semibold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20 hover:border-emerald-500/40 transition-colors"
+                title={`Open live app at ${displayDomain}`}
+              >
+                <span>Live App</span>
+                <ExternalLink className="w-2.5 h-2.5" />
+              </a>
+            )}
+          </div>
+          {/* Screenshot Preview */}
+          <div className="relative aspect-[16/9] w-full overflow-hidden bg-slate-900">
+            <img
+              src={project.image}
+              alt={`${project.title} live interface preview`}
+              className="w-full h-full object-cover object-top group-hover/img:scale-105 transition-transform duration-500 ease-out"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-60 group-hover/img:opacity-30 transition-opacity" />
+          </div>
+        </div>
+      );
+    }
+
+    // Default dynamic visual headers for code projects
     switch (project.id) {
       case 'ast-audio':
         return (
@@ -60,7 +105,6 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenCaseStudy }) => {
                 F1: 0.84172
               </span>
             </div>
-            {/* Visual waveform bars */}
             <div className="flex items-end gap-1 h-10 px-1">
               {[40, 75, 25, 90, 60, 85, 30, 95, 50, 80, 45, 90, 35, 70, 85].map((val, idx) => (
                 <div
@@ -180,7 +224,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenCaseStudy }) => {
               Featured <span className="text-gradient-ai">Projects &amp; Systems</span>
             </h2>
             <p className="mt-3 text-slate-600 dark:text-slate-400 text-base">
-              A curated selection of machine learning architectures, tabular predictive models, full-stack enterprise platforms, and AI product experiments.
+              A curated selection of live deployed AI web applications, deep learning architectures, competitive Kaggle ensembles, and enterprise platforms.
             </p>
           </div>
 
@@ -199,7 +243,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenCaseStudy }) => {
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs"
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs cursor-pointer"
                 >
                   ✕
                 </button>
@@ -295,12 +339,27 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenCaseStudy }) => {
                     className="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-blue hover:text-blue-600 dark:hover:text-cyan-300 transition-colors cursor-pointer"
                   >
                     <BookOpen className="w-3.5 h-3.5" />
-                    <span>Deep Case Study</span>
+                    <span>Case Study</span>
                     <ChevronRight className="w-3.5 h-3.5" />
                   </button>
 
                   <div className="flex items-center gap-2">
-                    {project.huggingfaceUrl && (
+                    {/* Live App Link */}
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 text-xs font-semibold font-mono transition-colors"
+                        title={`Open live app for ${project.title}`}
+                      >
+                        <Globe className="w-3 h-3" />
+                        <span>Live</span>
+                        <ExternalLink className="w-2.5 h-2.5" />
+                      </a>
+                    )}
+
+                    {project.huggingfaceUrl && !project.liveUrl && (
                       <a
                         href={project.huggingfaceUrl}
                         target="_blank"
@@ -310,19 +369,6 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenCaseStudy }) => {
                         aria-label={`${project.title} Hugging Face Demo`}
                       >
                         <Sparkles className="w-3.5 h-3.5" />
-                      </a>
-                    )}
-
-                    {project.liveUrl && !project.huggingfaceUrl && (
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 rounded-lg bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-700 dark:text-slate-300 transition-colors"
-                        title="Live Demo"
-                        aria-label={`${project.title} Live Demo`}
-                      >
-                        <ExternalLink className="w-3.5 h-3.5" />
                       </a>
                     )}
 
@@ -356,7 +402,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenCaseStudy }) => {
                   Additional Prototypes &amp; Concepts
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
-                  Applied experiments across legal tech, financial budgeting, agricultural AI, and operational systems.
+                  Applied experiments across cyber scam detection, operational systems, and digital bookkeeping.
                 </p>
               </div>
 
