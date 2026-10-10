@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { PERSONAL_INFO } from '../data/portfolioData';
 import { NeuralCanvas } from './NeuralCanvas';
 import { GithubIcon, LinkedinIcon } from './Icons';
@@ -14,37 +14,125 @@ import {
   Play, 
   Activity,
   CheckCircle2,
-  ExternalLink
+  ExternalLink,
+  Volume2,
+  VolumeX,
+  Command
 } from 'lucide-react';
 
 interface HeroProps {
   theme: 'dark' | 'light';
+  onOpenCommandMenu?: () => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ theme }) => {
+export const Hero: React.FC<HeroProps> = ({ theme, onOpenCommandMenu }) => {
   const [activeTab, setActiveTab] = useState<'inference' | 'architecture' | 'spec'>('inference');
   const [simulatedInferenceState, setSimulatedInferenceState] = useState<'idle' | 'running' | 'completed'>('completed');
+  const [soundEnabled, setSoundEnabled] = useState(true);
+  const [inferenceStepLabel, setInferenceStepLabel] = useState('Ready for Inference');
+
+  // Dynamic typing role rotator
+  const roles = [
+    "AI Engineer",
+    "Machine Learning Developer",
+    "AST Transformer Researcher",
+    "Full-Stack Product Builder"
+  ];
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState(roles[0]);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentRole = roles[roleIndex];
+    let timeout: number;
+
+    if (!isDeleting && displayedText.length < currentRole.length) {
+      timeout = window.setTimeout(() => {
+        setDisplayedText(currentRole.slice(0, displayedText.length + 1));
+      }, 70);
+    } else if (!isDeleting && displayedText.length === currentRole.length) {
+      timeout = window.setTimeout(() => setIsDeleting(true), 2400);
+    } else if (isDeleting && displayedText.length > 0) {
+      timeout = window.setTimeout(() => {
+        setDisplayedText(currentRole.slice(0, displayedText.length - 1));
+      }, 35);
+    } else if (isDeleting && displayedText.length === 0) {
+      setIsDeleting(false);
+      setRoleIndex((prev) => (prev + 1) % roles.length);
+    }
+
+    return () => window.clearTimeout(timeout);
+  }, [displayedText, isDeleting, roleIndex]);
+
+  // Audio Spectrogram simulation state
+  const [spectrumValues, setSpectrumValues] = useState<number[]>([
+    42, 68, 30, 85, 95, 60, 48, 72, 88, 35, 90, 75, 45, 82, 98, 64, 40, 78, 52, 90
+  ]);
+  const animIntervalRef = useRef<number | null>(null);
 
   const runSimulation = () => {
     setSimulatedInferenceState('running');
+    setInferenceStepLabel('Extracting 128 Mel-Bins & 16x16 Patches...');
+
+    // Web Audio Synthesizer: Play an authentic, crisp acoustic chirp
+    if (soundEnabled && typeof window !== 'undefined') {
+      try {
+        const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+        if (AudioContextClass) {
+          const ctx = new AudioContextClass();
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(440, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.35);
+
+          gain.gain.setValueAtTime(0.06, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.45);
+
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+
+          osc.start();
+          osc.stop(ctx.currentTime + 0.5);
+        }
+      } catch {
+        // Audio policy fallback
+      }
+    }
+
+    // Dynamic spectrum visualizer oscillation
+    let stepCount = 0;
+    if (animIntervalRef.current) window.clearInterval(animIntervalRef.current);
+    animIntervalRef.current = window.setInterval(() => {
+      setSpectrumValues(prev => prev.map(() => Math.floor(Math.random() * 85 + 15)));
+      stepCount++;
+      if (stepCount === 6) {
+        setInferenceStepLabel('AST Self-Attention Patch Projection...');
+      }
+    }, 100);
+
     setTimeout(() => {
+      if (animIntervalRef.current) window.clearInterval(animIntervalRef.current);
+      setSpectrumValues([42, 68, 30, 85, 95, 60, 48, 72, 88, 35, 90, 75, 45, 82, 98, 64, 40, 78, 52, 90]);
       setSimulatedInferenceState('completed');
-    }, 1200);
+      setInferenceStepLabel('Identified: Acoustic Signature (98.4%)');
+    }, 1500);
   };
 
   return (
     <section 
       id="hero" 
-      className="relative min-h-[92vh] flex items-center justify-center pt-28 pb-16 overflow-hidden cyber-grid"
+      className="relative min-h-[94vh] flex items-center justify-center pt-28 pb-16 overflow-hidden cyber-grid"
       aria-label="Introduction and Overview"
     >
       {/* Interactive Background Neural Canvas */}
       <NeuralCanvas theme={theme} />
 
       {/* Atmospheric Radial Gradients */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-brand-blue/15 dark:bg-brand-blue/10 rounded-full blur-[130px] pointer-events-none" />
-      <div className="absolute top-1/3 right-10 w-[350px] h-[350px] bg-brand-violet/15 dark:bg-brand-violet/10 rounded-full blur-[110px] pointer-events-none" />
-      <div className="absolute bottom-10 left-10 w-[300px] h-[300px] bg-brand-cyan/15 dark:bg-brand-cyan/10 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[450px] bg-brand-blue/15 dark:bg-brand-blue/12 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/3 right-10 w-[400px] h-[400px] bg-brand-violet/15 dark:bg-brand-violet/12 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-10 left-10 w-[350px] h-[350px] bg-brand-cyan/15 dark:bg-brand-cyan/12 rounded-full blur-[110px] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
@@ -52,21 +140,41 @@ export const Hero: React.FC<HeroProps> = ({ theme }) => {
           {/* Left Column: Headlines & Pitch */}
           <div className="lg:col-span-7 flex flex-col items-start text-left">
             
-            {/* Introductory Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 dark:bg-slate-800/80 light:bg-slate-100 border border-brand-blue/30 dark:border-brand-blue/40 shadow-sm backdrop-blur-md mb-6">
-              <span className="flex h-2 w-2 relative">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-cyan opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-cyan"></span>
-              </span>
-              <span className="text-xs font-semibold tracking-wider uppercase font-mono text-brand-blue dark:text-cyan-300 light:text-blue-700">
-                {PERSONAL_INFO.heroLabel}
-              </span>
+            {/* Top Badge & Interactive Command Palette hint */}
+            <div className="flex flex-wrap items-center gap-2.5 mb-6">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 dark:bg-slate-800/80 light:bg-slate-100 border border-brand-blue/30 dark:border-brand-blue/40 shadow-sm backdrop-blur-md">
+                <span className="flex h-2 w-2 relative">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-cyan opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-cyan"></span>
+                </span>
+                <span className="text-xs font-semibold tracking-wider uppercase font-mono text-brand-blue dark:text-cyan-300 light:text-blue-700">
+                  {PERSONAL_INFO.heroLabel}
+                </span>
+              </div>
+
+              {onOpenCommandMenu && (
+                <button
+                  onClick={onOpenCommandMenu}
+                  className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-[11px] font-mono text-slate-400 hover:text-white transition-colors cursor-pointer"
+                  title="Open command palette"
+                >
+                  <Command className="w-3 h-3 text-brand-blue" />
+                  <span>Press ⌘K for Quick Menu</span>
+                </button>
+              )}
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] mb-6 text-slate-900 dark:text-white">
-              I build <span className="bg-gradient-to-r from-blue-500 via-indigo-400 to-cyan-400 bg-clip-text text-transparent">intelligent systems</span> that solve real-world problems.
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] mb-4 text-slate-900 dark:text-white">
+              I build <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-300 bg-clip-text text-transparent">intelligent systems</span> that solve real-world problems.
             </h1>
+
+            {/* Dynamic Role Rotator Ticker */}
+            <div className="h-8 flex items-center gap-2 mb-6 font-mono text-base sm:text-lg text-slate-400 dark:text-slate-300">
+              <span className="text-brand-cyan">&gt;</span>
+              <span className="text-slate-900 dark:text-white font-semibold">{displayedText}</span>
+              <span className="w-2 h-5 bg-brand-cyan inline-block animate-pulse"></span>
+            </div>
 
             {/* Supporting Description */}
             <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-8 max-w-2xl font-normal">
@@ -166,19 +274,19 @@ export const Hero: React.FC<HeroProps> = ({ theme }) => {
                   <div className="flex items-center gap-1 bg-white/5 p-0.5 rounded-lg text-[11px] font-mono">
                     <button
                       onClick={() => setActiveTab('inference')}
-                      className={`px-2 py-0.5 rounded ${activeTab === 'inference' ? 'bg-brand-blue text-white' : 'text-slate-400 hover:text-white'}`}
+                      className={`px-2 py-0.5 rounded transition-colors ${activeTab === 'inference' ? 'bg-brand-blue text-white' : 'text-slate-400 hover:text-white'}`}
                     >
                       Inference
                     </button>
                     <button
                       onClick={() => setActiveTab('architecture')}
-                      className={`px-2 py-0.5 rounded ${activeTab === 'architecture' ? 'bg-brand-blue text-white' : 'text-slate-400 hover:text-white'}`}
+                      className={`px-2 py-0.5 rounded transition-colors ${activeTab === 'architecture' ? 'bg-brand-blue text-white' : 'text-slate-400 hover:text-white'}`}
                     >
                       Arch
                     </button>
                     <button
                       onClick={() => setActiveTab('spec')}
-                      className={`px-2 py-0.5 rounded ${activeTab === 'spec' ? 'bg-brand-blue text-white' : 'text-slate-400 hover:text-white'}`}
+                      className={`px-2 py-0.5 rounded transition-colors ${activeTab === 'spec' ? 'bg-brand-blue text-white' : 'text-slate-400 hover:text-white'}`}
                     >
                       Metrics
                     </button>
@@ -194,33 +302,47 @@ export const Hero: React.FC<HeroProps> = ({ theme }) => {
                           <Activity className="w-3.5 h-3.5 text-cyan-400" />
                           Target: Audio Spectrogram Transformer
                         </span>
-                        <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400">
-                          Ready
-                        </span>
+                        
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => setSoundEnabled(!soundEnabled)}
+                            className="text-slate-400 hover:text-cyan-300 p-0.5 transition-colors cursor-pointer"
+                            title={soundEnabled ? "Mute synth audio" : "Enable synth audio"}
+                            aria-label="Toggle synthetic audio"
+                          >
+                            {soundEnabled ? <Volume2 className="w-3.5 h-3.5 text-cyan-400" /> : <VolumeX className="w-3.5 h-3.5 text-slate-500" />}
+                          </button>
+                          <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-semibold">
+                            Live
+                          </span>
+                        </div>
                       </div>
 
                       {/* Simulated Audio Waveform / Spectrogram Bars */}
                       <div className="my-3">
                         <div className="text-[11px] text-slate-400 mb-1.5 flex justify-between">
                           <span>Log-Mel Spectrogram (128 Bins)</span>
-                          <span className="text-cyan-400 font-semibold">16 kHz Resampled</span>
+                          <span className="text-cyan-400 font-semibold font-mono">16 kHz Resampled</span>
                         </div>
-                        <div className="flex items-end gap-1 h-12 bg-slate-900/90 p-2 rounded-lg border border-white/5">
-                          {[42, 68, 30, 85, 95, 60, 48, 72, 88, 35, 90, 75, 45, 82, 98, 64, 40, 78, 52, 90].map((val, idx) => (
+                        <div className="flex items-end gap-1 h-14 bg-slate-900/90 p-2 rounded-lg border border-white/5 overflow-hidden">
+                          {spectrumValues.map((val, idx) => (
                             <div
                               key={idx}
-                              className={`flex-1 rounded-sm transition-all duration-300 ${
+                              className={`flex-1 rounded-sm transition-all duration-150 ${
                                 simulatedInferenceState === 'running'
-                                  ? 'bg-gradient-to-t from-cyan-500 to-blue-400 animate-pulse'
+                                  ? 'bg-gradient-to-t from-cyan-400 via-blue-500 to-violet-400 shadow-[0_0_8px_rgba(34,211,238,0.5)]'
                                   : 'bg-gradient-to-t from-blue-600 via-indigo-500 to-cyan-400'
                               }`}
                               style={{ 
-                                height: simulatedInferenceState === 'running' 
-                                  ? `${Math.max(15, (val * Math.random() * 1.2)).toFixed(0)}%` 
-                                  : `${val}%` 
+                                height: `${Math.min(100, Math.max(12, val))}%` 
                               }}
                             />
                           ))}
+                        </div>
+                        <div className="mt-1 text-[10px] text-slate-500 flex justify-between">
+                          <span>0 Hz</span>
+                          <span className="text-cyan-300/80">{inferenceStepLabel}</span>
+                          <span>8 kHz (Nyquist)</span>
                         </div>
                       </div>
 
@@ -244,10 +366,10 @@ export const Hero: React.FC<HeroProps> = ({ theme }) => {
                       <button
                         onClick={runSimulation}
                         disabled={simulatedInferenceState === 'running'}
-                        className="flex-1 inline-flex items-center justify-center gap-2 py-2 px-3 text-xs font-semibold rounded-lg bg-brand-blue/20 hover:bg-brand-blue/30 text-cyan-300 border border-brand-blue/30 transition-colors"
+                        className="flex-1 inline-flex items-center justify-center gap-2 py-2 px-3 text-xs font-semibold rounded-lg bg-brand-blue/20 hover:bg-brand-blue/30 text-cyan-300 border border-brand-blue/30 transition-all cursor-pointer shadow-sm hover:shadow-cyan-500/20"
                       >
                         <Play className="w-3 h-3 fill-current" />
-                        <span>{simulatedInferenceState === 'running' ? 'Evaluating Patches...' : 'Simulate AST Inference'}</span>
+                        <span>{simulatedInferenceState === 'running' ? 'Evaluating Patches...' : 'Simulate AST Audio Inference'}</span>
                       </button>
 
                       <a
@@ -257,7 +379,7 @@ export const Hero: React.FC<HeroProps> = ({ theme }) => {
                         className="inline-flex items-center gap-1 py-2 px-3 text-xs font-semibold rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10 transition-colors"
                         title="Open Hugging Face Live Space"
                       >
-                        <span>Hugging Face Space</span>
+                        <span>Hugging Face</span>
                         <ExternalLink className="w-3 h-3" />
                       </a>
                     </div>
@@ -295,8 +417,9 @@ export const Hero: React.FC<HeroProps> = ({ theme }) => {
                         </div>
                       </div>
                     </div>
-                    <div className="text-[11px] text-slate-400 p-2 rounded bg-white/5 border border-white/5">
-                      Base Model: <span className="text-cyan-300">MIT/ast-finetuned-audioset-10-10</span>
+                    <div className="text-[11px] text-slate-400 p-2 rounded bg-white/5 border border-white/5 flex justify-between items-center">
+                      <span>Base Model: <strong className="text-cyan-300 font-normal">MIT/ast-finetuned-audioset-10-10</strong></span>
+                      <span className="text-emerald-400 text-[10px]">PyTorch</span>
                     </div>
                   </div>
                 )}

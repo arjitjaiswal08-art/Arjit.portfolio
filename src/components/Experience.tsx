@@ -1,5 +1,6 @@
 import React from 'react';
 import { EXPERIENCE_MILESTONES } from '../data/portfolioData';
+import { SpotlightCard } from './SpotlightCard';
 import { 
   Milestone, 
   CheckCircle2, 
@@ -41,10 +42,12 @@ export const Experience: React.FC = () => {
                   <span className="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
                 </div>
 
-                {/* Content Card */}
+                {/* Content Card with Spotlight */}
                 <div className="w-full md:w-[calc(50%-2.5rem)] ml-12 md:ml-0">
-                  <div className="glass-panel p-6 sm:p-7 rounded-2xl border border-slate-200 dark:border-white/10 group-hover:border-brand-blue/40 transition-all shadow-md">
-                    
+                  <SpotlightCard
+                    spotlightColor="rgba(99, 102, 241, 0.2)"
+                    className="glass-panel p-6 sm:p-7 border border-slate-200 dark:border-white/10 group-hover:border-brand-blue/40 transition-all shadow-md"
+                  >
                     {/* Header info */}
                     <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
                       <span className="text-xs font-mono font-semibold px-2.5 py-0.5 rounded bg-brand-blue/10 dark:bg-brand-blue/20 text-brand-blue dark:text-cyan-300 border border-brand-blue/20">
@@ -86,7 +89,7 @@ export const Experience: React.FC = () => {
                       ))}
                     </div>
 
-                  </div>
+                  </SpotlightCard>
                 </div>
 
                 {/* Empty spacer for alternating balance */}

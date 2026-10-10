@@ -1,5 +1,6 @@
 import React from 'react';
 import { PERSONAL_INFO } from '../data/portfolioData';
+import { SpotlightCard } from './SpotlightCard';
 import { 
   Cpu, 
   Brain, 
@@ -9,9 +10,9 @@ import {
   Terminal, 
   Globe, 
   Sparkles, 
-  CheckCircle,
-  GraduationCap,
-  Code2,
+  CheckCircle, 
+  GraduationCap, 
+  Code2, 
   Workflow
 } from 'lucide-react';
 
@@ -120,11 +121,12 @@ export const About: React.FC = () => {
             </div>
           </div>
 
-          {/* Compact Profile Card */}
+          {/* Compact Profile Card with Spotlight effect */}
           <div className="lg:col-span-5 w-full">
-            <div className="glass-panel p-6 sm:p-7 rounded-2xl relative group overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-brand-blue/10 rounded-full blur-2xl pointer-events-none" />
-              
+            <SpotlightCard
+              spotlightColor="rgba(139, 92, 246, 0.2)"
+              className="glass-panel p-6 sm:p-7 border border-slate-200 dark:border-white/10 shadow-xl"
+            >
               <div className="flex items-center justify-between pb-5 mb-5 border-b border-slate-200 dark:border-white/10">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-brand-blue to-brand-violet flex items-center justify-center font-black text-white text-lg shadow-md">
@@ -186,7 +188,7 @@ export const About: React.FC = () => {
               <div className="mt-6 p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5 text-[11px] text-slate-500 dark:text-slate-400 leading-normal">
                 💡 <em>Honest representation: All portfolio projects, HackerRank certifications, and code repositories are verified and link directly to public demos or source code.</em>
               </div>
-            </div>
+            </SpotlightCard>
           </div>
 
         </div>
@@ -206,25 +208,28 @@ export const About: React.FC = () => {
             {lifecycleSteps.map((item) => {
               const Icon = item.icon;
               return (
-                <div
+                <SpotlightCard
                   key={item.step}
-                  className="glass-panel p-5 rounded-xl border border-slate-200 dark:border-white/10 hover:border-brand-blue/40 transition-all group flex flex-col justify-between"
+                  spotlightColor="rgba(59, 130, 246, 0.18)"
+                  className="glass-panel p-5 border border-slate-200 dark:border-white/10 hover:border-brand-blue/40 transition-all flex flex-col justify-between"
                 >
-                  <div>
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="font-mono text-xs font-bold text-slate-400 dark:text-slate-500 group-hover:text-brand-blue transition-colors">
-                        {item.step}
-                      </span>
-                      <Icon className={`w-4 h-4 ${item.color}`} />
+                  <div className="flex flex-col h-full justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="font-mono text-xs font-bold text-slate-400 dark:text-slate-500 group-hover:text-brand-blue transition-colors">
+                          {item.step}
+                        </span>
+                        <Icon className={`w-4 h-4 ${item.color}`} />
+                      </div>
+                      <h4 className="font-semibold text-sm text-slate-900 dark:text-slate-100 mb-2">
+                        {item.title}
+                      </h4>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                        {item.desc}
+                      </p>
                     </div>
-                    <h4 className="font-semibold text-sm text-slate-900 dark:text-slate-100 mb-2">
-                      {item.title}
-                    </h4>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                      {item.desc}
-                    </p>
                   </div>
-                </div>
+                </SpotlightCard>
               );
             })}
           </div>

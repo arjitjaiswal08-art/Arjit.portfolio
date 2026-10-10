@@ -6,16 +6,18 @@ import {
   Menu, 
   X, 
   FileText, 
-  Sparkles,
-  ArrowUpRight
+  Sparkles, 
+  ArrowUpRight,
+  Command
 } from 'lucide-react';
 
 interface NavbarProps {
   theme: 'dark' | 'light';
   toggleTheme: () => void;
+  onOpenCommandMenu?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
+export const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenCommandMenu }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -52,7 +54,7 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
             className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue rounded-lg p-1"
             aria-label="Arjit Jaiswal - Home"
           >
-            <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-brand-blue/20 via-brand-violet/20 to-brand-cyan/20 border border-white/10 dark:border-white/10 light:border-slate-300 group-hover:border-brand-blue/50 transition-colors">
+            <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-brand-blue/20 via-brand-violet/20 to-brand-cyan/20 border border-white/10 dark:border-white/10 light:border-slate-300 group-hover:border-brand-blue/50 transition-colors shadow-sm">
               <span className="font-black text-sm tracking-tighter bg-gradient-to-r from-brand-blue via-brand-violet to-brand-cyan bg-clip-text text-transparent">
                 {PERSONAL_INFO.monogram}
               </span>
@@ -87,6 +89,18 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
 
           {/* Right Action Buttons */}
           <div className="hidden sm:flex items-center gap-3">
+            {/* Command Palette Trigger */}
+            {onOpenCommandMenu && (
+              <button
+                onClick={onOpenCommandMenu}
+                className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-mono rounded-lg bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/10 transition-colors cursor-pointer"
+                title="Quick Search & Actions (⌘K)"
+              >
+                <Command className="w-3.5 h-3.5 text-brand-blue" />
+                <span>⌘K</span>
+              </button>
+            )}
+
             {/* Status Indicator */}
             <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[11px] font-mono text-emerald-600 dark:text-emerald-400">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -110,7 +124,7 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
             <button
               onClick={toggleTheme}
               aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-              className="p-2 rounded-lg bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-700 dark:text-slate-300 transition-colors border border-slate-200 dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-brand-blue"
+              className="p-2 rounded-lg bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-700 dark:text-slate-300 transition-colors border border-slate-200 dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-brand-blue cursor-pointer"
             >
               {theme === 'dark' ? (
                 <Sun className="w-4 h-4 text-amber-400" />
@@ -122,6 +136,16 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
 
           {/* Mobile Menu Button */}
           <div className="flex sm:hidden items-center gap-2">
+            {onOpenCommandMenu && (
+              <button
+                onClick={onOpenCommandMenu}
+                className="p-2 rounded-lg bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-white/10"
+                aria-label="Search and quick commands"
+              >
+                <Command className="w-4 h-4 text-brand-blue" />
+              </button>
+            )}
+
             <button
               onClick={toggleTheme}
               aria-label="Toggle theme"
