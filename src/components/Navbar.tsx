@@ -53,15 +53,15 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onOpenComman
             className="flex items-center gap-3.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue rounded-xl p-1"
             aria-label="Arjit Jaiswal - Home"
           >
-            <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950 border border-white/15 group-hover:border-cyan-400/60 transition-all duration-300 shadow-[0_0_15px_rgba(56,189,248,0.15)] group-hover:shadow-[0_0_20px_rgba(56,189,248,0.35)]">
-              {/* Inner ambient glow */}
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-tr from-cyan-500/10 via-indigo-500/10 to-violet-500/10 opacity-80 group-hover:opacity-100 transition-opacity" />
-              <span className="font-extrabold text-sm tracking-tight text-white group-hover:text-cyan-300 transition-colors z-10 font-mono">
-                {PERSONAL_INFO.monogram}
-              </span>
+            <div className="relative flex items-center justify-center w-10 h-10 rounded-xl overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950 border border-white/20 group-hover:border-cyan-400/60 transition-all duration-300 shadow-[0_0_15px_rgba(56,189,248,0.2)] group-hover:shadow-[0_0_20px_rgba(56,189,248,0.4)]">
+              <img 
+                src={PERSONAL_INFO.avatar} 
+                alt={PERSONAL_INFO.name} 
+                className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300" 
+              />
               <span className="absolute -top-1 -right-1 flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-cyan-500 border-2 border-slate-950"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-400 border-2 border-slate-950"></span>
               </span>
             </div>
             <div className="flex flex-col">

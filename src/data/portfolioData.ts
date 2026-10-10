@@ -49,6 +49,7 @@ export interface Certification {
 export const PERSONAL_INFO = {
   name: "Arjit Jaiswal",
   monogram: "AJ",
+  avatar: "/profile.jpg",
   institution: "IIT Madras",
   program: "Data Science and Artificial Intelligence",
   roles: [

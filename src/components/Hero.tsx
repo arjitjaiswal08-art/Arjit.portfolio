@@ -200,26 +200,35 @@ export const Hero: React.FC<HeroProps> = ({ theme, onOpenCommandMenu }) => {
           {/* Left Column: Headlines, Pitch, & CTAs */}
           <div className="lg:col-span-7 flex flex-col items-start text-left">
             
-            {/* Top Pill: IIT Madras & Interactive Quick Menu */}
-            <div className="flex flex-wrap items-center gap-2.5 mb-5">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-cyan-500/30 shadow-[0_0_15px_rgba(6,182,212,0.15)] backdrop-blur-md">
-                <span className="flex h-2 w-2 relative">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
-                </span>
-                <span className="text-xs font-semibold tracking-wider uppercase font-mono text-cyan-300">
-                  IIT MADRAS • DATA SCIENCE & AI
-                </span>
+            {/* Top Identity Capsule: Photo + Name + IIT Madras + Command Menu */}
+            <div className="flex flex-wrap items-center gap-3 mb-6">
+              <div className="inline-flex items-center gap-3 p-1.5 pr-4 rounded-full bg-slate-900/90 border border-cyan-500/30 shadow-[0_0_20px_rgba(6,182,212,0.18)] backdrop-blur-xl group hover:border-cyan-400/60 transition-all duration-300">
+                <div className="relative w-9 h-9 rounded-full overflow-hidden border border-white/20 shadow-inner shrink-0">
+                  <img
+                    src={PERSONAL_INFO.avatar}
+                    alt={PERSONAL_INFO.name}
+                    className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-300"
+                  />
+                  <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-slate-950"></span>
+                </div>
+                <div className="flex flex-col text-left">
+                  <span className="text-xs font-bold text-white flex items-center gap-1.5 font-sans">
+                    {PERSONAL_INFO.name}
+                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                    <span className="text-[11px] font-mono font-medium text-cyan-300">IIT Madras</span>
+                  </span>
+                  <span className="text-[10px] font-mono text-slate-400">Data Science &amp; AI • AI Engineer</span>
+                </div>
               </div>
 
               {onOpenCommandMenu && (
                 <button
                   onClick={onOpenCommandMenu}
-                  className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-[11px] font-mono text-slate-300 hover:text-white transition-all cursor-pointer shadow-sm"
+                  className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-[11px] font-mono text-slate-300 hover:text-white transition-all cursor-pointer shadow-sm"
                   title="Open command palette"
                 >
-                  <Command className="w-3 h-3 text-cyan-400" />
-                  <span>Press ⌘K for Quick Menu</span>
+                  <Command className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>Press ⌘K for Menu</span>
                 </button>
               )}
             </div>
